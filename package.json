@@ -26,3 +26,4 @@
     "express": "^4.13.4"
   }
 }
+//rhc app create 'dalecorns' nodejs-0.10 --from-code=https://github.com/dcorns/dalecorns.com.git
