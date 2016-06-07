@@ -1,0 +1,24 @@
+{
+  "name": "dalecorns.com",
+  "version": "1.0.0",
+  "description": "An advanced resume for the future",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dcorns/dalecorns.com.git"
+  },
+  "author": "Dale R. Corns",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dcorns/dalecorns.com/issues"
+  },
+  "homepage": "https://github.com/dcorns/dalecorns.com#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "corngoose": "^1.1.2",
+    "express": "^4.13.4"
+  }
+}
