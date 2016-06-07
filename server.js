@@ -18,5 +18,5 @@ let server = app.listen(server_port, server_ip_address, function(){
   let host = server.address().address;
   let port = server.address().port;
   console.log('Server listening on ' + host + ', port: ' + port);
-  corngoose.startDB('drc');
+  corngoose.startDB('dalecorns');
 });
