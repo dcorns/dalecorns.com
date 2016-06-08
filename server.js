@@ -10,6 +10,21 @@ var mongoClient = require('mongodb').MongoClient;
 let app = express();
 let server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 let server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+let mongoUri, procE =process.env, dbName = 'drc';
+if(procE.OPENSHIFT_MONGODB_DB_PASSWORD){
+  mongoUri = 'mongodb://' + procE.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+    procE.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+    procE.OPENSHIFT_MONGODB_DB_HOST + ':' +
+    procE.OPENSHIFT_MONGODB_DB_PORT + '/' + dbName;
+}
+
+mongoClient.connect(mongoUri, function(err, db){
+  if(err) {
+    console.dir(err);
+  }
+  console.dir(db);
+});
+
 
 app.get('/', function (req, res) {
   res.send('<h1>Hello!</h1>');
