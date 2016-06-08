@@ -19,8 +19,7 @@ if(procE.OPENSHIFT_MONGODB_DB_PASSWORD){
 }
 mongoUri = 'mongodb://' + procE.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
   procE.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-  procE.OPENSHIFT_MONGODB_DB_HOST + ':' +
-  procE.OPENSHIFT_MONGODB_DB_PORT + '/' + dbName;
+  procE.OPENSHIFT_MONGODB_DB_URL + '/' + dbName;
 console.dir(mongoUri);
 mongoClient.connect(mongoUri, function(err, db){
   if(err) {
