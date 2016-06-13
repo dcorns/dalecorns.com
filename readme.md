@@ -38,3 +38,13 @@ rhc env set FIREBASE_KEY1='*partOfKey*' -a *openshiftAppName* (etc.)<br/>
 In the same manner provide variables for email, project Id and database(see server.js)<br/>
 rhc env set FIREBASE_DB='*appName*.firebaseio.com' -a *openshiftAppName*<br/>
 Verify variables: rhc env list -a *openshiftAppName*
+####Testing Firebase Data access
+set fire base rules wide open
+```
+{
+  "rules": {
+    ".read": "true",
+    ".write": "true"
+  }
+}
+```
