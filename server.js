@@ -5,27 +5,18 @@
  */
 'use strict';
 let express = require('express');
-// let corngoose = require('corngoose');
-var mongoClient = require('mongodb').MongoClient;
+let firebase = require('firebase');
 let app = express();
 let server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 let server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-let mongoUri, procE =process.env, dbName = 'drc';
-if(procE.OPENSHIFT_MONGODB_DB_PASSWORD){
-  mongoUri = 'mongodb://' + procE.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-    procE.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-    procE.OPENSHIFT_MONGODB_DB_HOST + ':' +
-    procE.OPENSHIFT_MONGODB_DB_PORT + '/' + dbName;
-}
-mongoUri = 'mongodb://' + procE.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-  procE.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-  procE.OPENSHIFT_MONGODB_DB_URL + '/' + dbName;
-console.dir(mongoUri);
-mongoClient.connect(mongoUri, function(err, db){
-  if(err) {
-    console.dir(err);
-  }
-  console.dir(db);
+var privateKey = process.env.FIREBASE_KEY + process.env.FIREBASE_KEY2 + process.env.FIREBASE_KEY3 + process.env.FIREBASE_KEY4;
+firebase.initializeApp({
+  serviceAccount:{
+    projectID: process.env.FIREBASE_PROJECT_ID,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    privateKey: privateKey
+  },
+  databaseURL: process.env.FIREBASE_DB
 });
 
 
