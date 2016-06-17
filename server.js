@@ -5,7 +5,6 @@
  */
 'use strict';
 let express = require('express');
-let firebase = require('firebase');
 let corngoose = require('corngoose');
 let app = express();
 let server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
@@ -16,11 +15,19 @@ corngoose.startDB('drc');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
+  res.setHeader('Content-Security-Policy', "script-src 'self';" +
+    "style-src 'self'");
+  res.status(200);
+  res.header('Content-Type', 'text/html');
   res.sendFile('index.html');
+  res.end();
 });
 
-let server = app.listen(server_port, server_ip_address, function(){
+var server = app.listen(server_port, server_ip_address, function(){
   let host = server.address().address;
   let port = server.address().port;
   console.log('Server listening on ' + host + ', port: ' + port);
 });
+
+//Add this line for testing with superTest
+module.exports = server;
