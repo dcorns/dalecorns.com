@@ -9,9 +9,8 @@ let corngoose = require('corngoose');
 let app = express();
 let server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 let server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-corngoose.startDB('drc');
-
-
+let server;
+//Serve static assets from public
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
@@ -23,11 +22,21 @@ app.get('/', function (req, res) {
   res.end();
 });
 
-var server = app.listen(server_port, server_ip_address, function(){
+try{
+  corngoose.startDB('drc');
+}
+catch(e){
+  console.log('Data base not found');
+//throw new Error('Running database required, database failed to start');
+}
+
+
+server = app.listen(server_port, server_ip_address, function(){
   let host = server.address().address;
   let port = server.address().port;
   console.log('Server listening on ' + host + ', port: ' + port);
 });
+
 
 //Add this line for testing with superTest
 module.exports = server;

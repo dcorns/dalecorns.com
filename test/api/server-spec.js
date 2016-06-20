@@ -4,10 +4,9 @@
  * Copyright © 2016 Dale Corns
  */
 'use strict';
-
 var request = require('supertest');
 var expect = require('chai').expect;
-describe('server', function(){
+describe('server.js', function(){
   var server;
   beforeEach(function(){
     //in order to have a new server instance created each time we must bust the cache otherwise node will not require it a second time, it will just use the cached version
