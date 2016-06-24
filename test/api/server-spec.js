@@ -6,6 +6,7 @@
 'use strict';
 var request = require('supertest');
 var expect = require('chai').expect;
+
 describe('server.js', function(){
   var server;
   beforeEach(function(){
@@ -14,8 +15,9 @@ describe('server.js', function(){
     server = require('../../server');
   });
   //pass done to server close so it waits for the previous server instance to stop
-  afterEach(function(){
+  afterEach(function(done){
       server.close();
+    done();
   });
   it('it responds to /', function testGetRoot(done){
     request(server)

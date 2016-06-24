@@ -10,6 +10,8 @@ let app = express();
 let server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 let server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 let server;
+let db;
+let proc = require('child_process');
 //Serve static assets from public
 app.use(express.static(__dirname + '/public'));
 
@@ -22,13 +24,23 @@ app.get('/', function (req, res) {
   res.end();
 });
 
-try{
-  corngoose.startDB('drc');
-}
-catch(e){
-  console.log('Data base not found');
-//throw new Error('Running database required, database failed to start');
-}
+corngoose.startDB('drc', null, function(err, data){
+  if(err){
+    // proc.exec('mongod', function(err, stdio, stderr) {
+    //   console.log('stuff: ', stdio, stderr);
+    //   if (stdio) {
+    //
+    //   }
+    // });
+  }
+  else {
+    // server = app.listen(server_port, server_ip_address, function(){
+    //   let host = server.address().address;
+    //   let port = server.address().port;
+    //   console.log('Server listening on ' + host + ', port: ' + port);
+    // });
+  }
+});
 
 
 server = app.listen(server_port, server_ip_address, function(){
@@ -36,7 +48,6 @@ server = app.listen(server_port, server_ip_address, function(){
   let port = server.address().port;
   console.log('Server listening on ' + host + ', port: ' + port);
 });
-
 
 //Add this line for testing with superTest
 module.exports = server;
