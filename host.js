@@ -7,15 +7,6 @@
 let proc = require('child_process');
 let host = {};
 
-host.startHost = function startHost(){
-  console.log('host starting up');
-  this.checkForRunningDb('mongo', function(err, data){
-    if(err){
-      this.startDb('mongo');
-    }
-  });
-};
-
 host.startDb = function startDb(dbType){
   switch (dbType){
     case 'mongo':
@@ -31,14 +22,18 @@ host.checkForRunningDb = function checkForRunningDb(dbType, cb){
     case 'mongo':
       //Spawns a shell then executes the command within that shell, buffering any generated output.
       proc.exec('pgrep mongod', function(err, stdout, stderr){
-         if(stdout) cb(null, stdout);
-         else cb(err, null);
+        console.log(err, stdout, stderr);
+         if(stdout){
+           cb(null, stdout);
+         }
+         else{
+           cb(err, null);
+         }
       });
       break;
     default:
       break;
   }
 };
-
 
 module.exports = host;
