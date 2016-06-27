@@ -35,9 +35,9 @@ corngoose.startDB('drc', null, function(err, data){
   }
   else {
     // server = app.listen(server_port, server_ip_address, function(){
-    //   let host = server.address().address;
+    //   let dbRunner = server.address().address;
     //   let port = server.address().port;
-    //   console.log('Server listening on ' + host + ', port: ' + port);
+    //   console.log('Server listening on ' + dbRunner + ', port: ' + port);
     // });
   }
 });
