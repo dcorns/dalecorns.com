@@ -22,7 +22,6 @@ host.checkForRunningDb = function checkForRunningDb(dbType, cb){
     case 'mongo':
       //Spawns a shell then executes the command within that shell, buffering any generated output.
       proc.exec('pgrep mongod', function(err, stdout, stderr){
-        console.log(err, stdout, stderr);
          if(stdout){
            cb(null, stdout);
          }

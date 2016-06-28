@@ -2,9 +2,9 @@
   "name": "dalecorns.com",
   "version": "1.0.0",
   "description": "An advanced resume for the future",
-  "main": "server.js",
+  "main": "host.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node host.js",
     "test": "./node_modules/mocha/bin/mocha"
   },
   "repository": {
