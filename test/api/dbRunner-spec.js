@@ -6,10 +6,9 @@
 'use strict';
 var proc = require('child_process');
 var expect = require('chai').expect;
-var sinon = require('sinon');
+var sino = require('sinon');
 var dbRunner;
 
-console.dir(proc.exec);
 describe('dbRunner.js', function(){
   beforeEach(function(done){
     //in order to have a new server instance created each time we must bust the cache otherwise node will not require it a second time, it will just use the cached version
@@ -22,16 +21,15 @@ describe('dbRunner.js', function(){
       typeof expect(typeof dbRunner.checkForRunningDb).to.equal('function');
     });
     it('calls proc.exec with pgrep mongod argument', function(done){
-      var procSpy = sinon.spy(proc, 'exec');
+      var procSpy = sino.spy(proc, 'exec');
       dbRunner.checkForRunningDb('mongo');
       expect(procSpy.calledWith('pgrep mongod')).ok;
       expect(procSpy.args[0][0]).equal('pgrep mongod');
-      console.dir(procSpy);
       proc.exec.restore();
       done();
     });
     it('returns process ID, and null in err if the database is running', function (done) {
-      sinon.stub(proc, 'exec').yields(null, '354');
+      sino.stub(proc, 'exec').yields(null, '354');
       dbRunner.checkForRunningDb('mongo', function (err, data) {
         expect(data > 0).to.equal(true);
         expect(err).equal(null);
@@ -41,7 +39,7 @@ describe('dbRunner.js', function(){
     });
 
     it('returns an error object and null in data when a database in not running', function(done){
-      sinon.stub(proc, 'exec').yields({}, null);
+      sino.stub(proc, 'exec').yields({}, null);
         dbRunner.checkForRunningDb('mongo', function(err, data){
           expect(data).equal(null);
           expect(err).ok;
@@ -57,7 +55,7 @@ describe('dbRunner.js', function(){
       typeof expect(typeof dbRunner.startDb).to.equal('function');
     });
     it('starts a mongo DB server the database server', function(done){
-      var startSpy = sinon.spy(proc, 'exec');
+      var startSpy = sino.spy(proc, 'exec');
       dbRunner.startDb('mongo');
       expect(startSpy.calledWith('mongod')).ok;
       expect(startSpy.args[0][0]).equal('mongod');

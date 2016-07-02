@@ -9,10 +9,11 @@ var expect = require('chai').expect;
 
 describe('server.js', function(){
   var server;
-  beforeEach(function(){
+  beforeEach(function(done){
     //in order to have a new server instance created each time we must bust the cache otherwise node will not require it a second time, it will just use the cached version
     delete require.cache[require.resolve('../../server')];
     server = require('../../server');
+    done();
   });
   //pass done to server close so it waits for the previous server instance to stop
   afterEach(function(done){

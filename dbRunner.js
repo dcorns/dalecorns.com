@@ -5,9 +5,9 @@
  */
 'use strict';
 let proc = require('child_process');
-let host = {};
+let dbRunner = {};
 
-host.startDb = function startDb(dbType){
+dbRunner.startDb = function startDb(dbType){
   switch (dbType){
     case 'mongo':
       proc.exec('mongod');
@@ -17,7 +17,7 @@ host.startDb = function startDb(dbType){
   }
 };
 
-host.checkForRunningDb = function checkForRunningDb(dbType, cb){
+dbRunner.checkForRunningDb = function checkForRunningDb(dbType, cb){
   switch (dbType){
     case 'mongo':
       //Spawns a shell then executes the command within that shell, buffering any generated output.
@@ -35,4 +35,4 @@ host.checkForRunningDb = function checkForRunningDb(dbType, cb){
   }
 };
 
-module.exports = host;
+module.exports = dbRunner;

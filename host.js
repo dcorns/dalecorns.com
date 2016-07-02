@@ -5,13 +5,15 @@
  */
 'use strict';
 var db = require('./dbRunner');
-//var server = require('./server');
 var proc = require('child_process');
-
-db.checkForRunningDb('mongo', function(err, data){
-  if(err){
-    db.startDb('mongo');
-  }
-  console.log('database running');
+var host = {};
+host.startHost = function startHost(){
+  db.checkForRunningDb('mongo', function(err, data){
+    if(err){
+      db.startDb('mongo');
+    }
+  });
   proc.fork('server');
-});
+};
+module.exports = host;
+host.startHost();
