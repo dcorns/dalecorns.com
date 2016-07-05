@@ -10,7 +10,11 @@ let dbRunner = {};
 dbRunner.startDb = function startDb(dbType){
   switch (dbType){
     case 'mongo':
-      proc.exec('mongod');
+      this.checkForRunningDb('mongo', function(err, data){
+        if(err){
+          proc.exec('mongod');
+        }
+      });
       break;
     default:
       break;
@@ -21,7 +25,7 @@ dbRunner.checkForRunningDb = function checkForRunningDb(dbType, cb){
   switch (dbType){
     case 'mongo':
       //Spawns a shell then executes the command within that shell, buffering any generated output.
-      proc.exec('pgrep mongod', function(err, stdout, stderr){
+      proc.exec('pgrep mongod', function(err, stdout){
          if(stdout){
            cb(null, stdout);
          }

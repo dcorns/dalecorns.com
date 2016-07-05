@@ -54,14 +54,32 @@ describe('dbRunner.js', function(){
     it('exists', function(){
       typeof expect(typeof dbRunner.startDb).to.equal('function');
     });
-    it('starts a mongo DB server the database server', function(done){
+    it('it does nothing if checkForRunningDb calls back with null as the first argument', function(done){
       var startSpy = sino.spy(proc, 'exec');
+      //var dbRSpy = sino.spy(dbRunner, 'checkForRunningDb');
+      var dbStub = sino.stub(dbRunner, 'checkForRunningDb').yields(null);
       dbRunner.startDb('mongo');
+      expect(dbStub.calledWith('mongo')).ok;
+      expect(startSpy.called).not.ok;
+     // expect(startSpy.calledWith('mongod')).ok;
+     // expect(startSpy.args[0][0]).equal('mongod');
+      proc.exec.restore();
+      dbRunner.checkForRunningDb.restore();
+      done();
+    });
+    it('it starts the database if checkForRunningDb calls back with an object as the first argument', function(done){
+      var startSpy = sino.spy(proc, 'exec');
+      var dbStub = sino.stub(dbRunner, 'checkForRunningDb').yields({});
+      dbRunner.startDb('mongo');
+      expect(dbStub.calledWith('mongo')).ok;
       expect(startSpy.calledWith('mongod')).ok;
       expect(startSpy.args[0][0]).equal('mongod');
       proc.exec.restore();
+      dbRunner.checkForRunningDb.restore();
       done();
     });
+
+
   });
   
 });
