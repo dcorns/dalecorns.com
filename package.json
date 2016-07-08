@@ -24,6 +24,7 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "corngoose": "^1.1.2",
+    "cornorize": "^1.0.4",
     "express": "^4.13.4"
   },
   "devDependencies": {
