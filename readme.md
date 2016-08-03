@@ -31,11 +31,11 @@ Make available in app:
 `var firebaseCredentials = JSON.parse(process.env.FIREBASE);`
 <br/>
 `require('firebase')`<br/>
-see server.js for remaining details
+see server.ts for remaining details
 #####Add evs to openshift
 Because the custom environment variables on openshift are limited to 512 characters a method for breaking the firebase secret up into multiple variables must be employed. Using  the usefulFunctions.breakUpString function, break the firebase private key into strings of 500 characters or less. Then create environment variables for each one in openshift.
 rhc env set FIREBASE_KEY1='*partOfKey*' -a *openshiftAppName* (etc.)<br/>
-In the same manner provide variables for email, project Id and database(see server.js)<br/>
+In the same manner provide variables for email, project Id and database(see server.ts)<br/>
 rhc env set FIREBASE_DB='*appName*.firebaseio.com' -a *openshiftAppName*<br/>
 Verify variables: rhc env list -a *openshiftAppName*
 ####Testing Firebase Data access
