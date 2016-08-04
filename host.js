@@ -4,12 +4,11 @@
  * Copyright © 2016 Dale Corns
  * Start the mongo database server the www server hello
  */
-'use strict';
 ///<reference path='all.d.ts' />
-var startDb = require('./dbRunner');
+'use strict';
+var DbRunner = require('./dbRunner');
 var proc = require('child_process');
-//import proc from 'child_process';
-startDb('mongo', function (err, data) {
+DbRunner.startDb('mongo', function (err, data) {
     if (err) {
         throw new Error('It appears that no mongo database is installed');
     }
