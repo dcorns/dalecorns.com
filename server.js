@@ -3,7 +3,12 @@
  * Created by dcorns on 6/7/16
  * Copyright © 2016 Dale Corns
  */
+/// <reference path="all.d.ts" />
 'use strict';
+// declare function require(name: string);
+// declare var process: any;
+// declare var __dirname: string;
+// declare var module: any;
 var express = require("express");
 var corngoose = require("corngoose");
 var app = express();

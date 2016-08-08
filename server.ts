@@ -3,14 +3,14 @@
  * Created by dcorns on 6/7/16
  * Copyright © 2016 Dale Corns
  */
-'use strict';
 /// <reference path="all.d.ts" />
-declare function require(name: string);
-declare var process: any;
-declare var __dirname: string;
-declare var module: any;
+'use strict';
+// declare function require(name: string);
+// declare var process: any;
+// declare var __dirname: string;
+// declare var module: any;
 import * as express from "express";
-import * as corngoose from "corngoose";
+let corngoose = require ("corngoose");
 let app = express();
 let server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 let server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
