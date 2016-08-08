@@ -10,12 +10,12 @@
 'use strict';
 var gulp = require('gulp');
 var childProcess = require('child_process').spawn;
-var cssnext = require('gulp-cssnext');
+var postcss = require('gulp-postcss');
 var concatCss = require('gulp-concat-css');
-var autoprefixer = require('gulp-autoprefixer');
-var gulpWebpack = require('gulp-webpack');
+var cssnext = require('postcss-cssnext');
+var cssnano = require('cssnano');
+var gulpWebpack = require('webpack-stream');
 var webpack = require('webpack');
-var uglify = require('gulp-uglify');
 
 gulp.task('grunt', function(){
   childProcess('grunt');
@@ -37,7 +37,7 @@ gulp.task('copyassets', function(){
 });
 
 gulp.task('dev-server', function(){
-  const cp = childProcess('node', ['server', './Development/']);
+  const cp = childProcess('node', ['server', '/Development']);
   cp.stdout.on('data', function(data){
     console.log(data.toString('utf8'));
   });
@@ -46,10 +46,7 @@ gulp.task('dev-server', function(){
 gulp.task('build-css', function(){
   return gulp.src('app/styles/**/*')
     .pipe(concatCss('main.css'))
-    .pipe(cssnext({
-      compress: true
-    }))
-    .pipe(autoprefixer())
+    .pipe(postcss([ cssnext(), cssnano()]))
     .pipe(gulp.dest('Development/css'));
 });
 
@@ -67,7 +64,7 @@ gulp.task('watcher', function(){
 
 gulp.task('ship', function(){
   gulp.src(['Development/**/*'])
-    .pipe(gulp.dest('static'));
+    .pipe(gulp.dest('public'));
 });
 
 gulp.task('default',['watcher', 'dev-server']);

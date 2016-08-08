@@ -16,7 +16,8 @@ var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server;
 //Serve static assets from public
-app.use(express.static(__dirname + '/public'));
+var webRoot = process.argv[2] || '/public';
+app.use(express.static(__dirname + webRoot));
 app.get('/', function (req, res) {
     res.setHeader('Content-Security-Policy', "script-src 'self';" +
         "style-src 'self'");

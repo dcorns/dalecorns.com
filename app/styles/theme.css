@@ -1,0 +1,93 @@
+/*Style Theme*/
+:root {
+    --body_bg_color: #8ECBE3;
+    --main_border_color: #134AD9;
+    --font_color: #3D4966;
+    --emph_color: #FFF6BF;
+    --shade_color: #FF3127;
+    --show_bg: #000000;
+    --valid_bg: #ddffdd;
+    --invalid_bg: #ffdddd;
+
+}
+
+body{
+    background-color: var(--body_bg_color);
+    color: var(--font_color);
+}
+header{
+    background: linear-gradient(var(--main_border_color),var(--body_bg_color));
+}
+nav{
+    background: linear-gradient(var(--main_border_color),var(--body_bg_color));
+}
+h1{
+    font-style: oblique;
+    font-weight: 400;
+}
+button {
+    background-color: transparent;
+}
+.show{
+    border-radius: 7pt;
+}
+.github{
+    background-image: url("../icon/GitHub-Mark-32px.png");
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+
+}
+.linkdn{
+    background-image: url("../icon/linkedin-icon-logo-vector-32x32.png");
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+}
+.twitter{
+    background-image: url("../icon/twitter-icon-circle-logo.png");
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+}
+.googleplus{
+    background-image: url("../icon/optly_googleplus.png");
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+}
+.youtube{
+    background-image: url("../icon/youtube_23.png");
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+}
+.treehouse{
+    background-image: url("../icon/treehouse-32-black.png");
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+}
+.coursera{
+    background-image: url("../icon/coursera-32-black.png");
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+}
+
+input:invalid {
+    background-color: var(--invalid_bg);
+}
+
+input:valid {
+    background-color: var( --valid_bg);
+}
+
+input:required {
+    border-color: #800000;
+    border-width: 3px;
+}
+
+.hide{
+    display: none;
+}

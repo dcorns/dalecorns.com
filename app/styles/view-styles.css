@@ -1,0 +1,10 @@
+#aboutme p{
+    column-count: 3;
+    column-gap: 20px;
+    column-rule: solid #aaaaaa;
+    text-align: justify;
+}
+
+#aboutme h4{
+    text-align: center;
+}

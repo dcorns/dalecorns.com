@@ -1,0 +1,119 @@
+/*Style Layout*/
+
+
+/*At 500 eventually*/
+h2{
+    margin: 0;
+    padding: 0;
+}
+h3{
+    margin: 0;
+    padding: 0;
+}
+.toggle-menu{
+    display: none;
+}
+.img-btn{
+    height: 40px;
+    width: 40px;
+}
+table tr{
+    border-bottom: black;
+    border-style: solid;
+}
+table td{
+    padding:10px;
+}
+@media screen and (min-width: 800px) {
+    header {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        border-radius: 6pt;
+        border-bottom: 2px solid var(--emph_color);
+        position: fixed;
+        width: 100%;
+    }
+    main {
+        margin-top: 200px;
+        width: 83%;
+        float: right;
+        margin-right: 10px;
+    }
+    .top img {
+        width: 100%;
+    }
+    h2{
+        font-size: 5em;
+    }
+    h3{
+        font-size: 3em;
+    }
+    .mobile-menu{
+        display: none;
+    }
+    .show {
+        margin: 0;
+        min-height: 150px;
+        max-height: 150px;
+        max-width: 150px;
+        min-width: 150px;
+        overflow: hidden;
+        background-color: #cccccc;
+    }
+
+    .page-nav {
+        position: fixed;
+        z-index: -1;
+        top: 200px;
+        display: block;
+        width: 14%;
+        padding-top: 10px;
+        height: 100%;
+        border-radius: 6pt;
+        border-right: 2px solid var(--emph_color);
+        border-left: 2px solid var(--emph_color);
+    }
+
+}
+/*Was 500*/
+@media screen and (max-width: 800px){
+    body{
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: column;
+        justify-content: flex-start;
+
+    }
+    header {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        border-radius: 6pt;
+        border-bottom: 2px solid var(--emph_color);
+        width: 100%;
+    }
+    h1{
+        font-size: 25px;
+    }
+    h2{
+        font-size: 20px;
+        display: inline-block;
+    }
+    .page-nav{
+        display: none;
+    }
+
+    .show{
+        margin: 0;
+        max-width: 100px;
+        max-height: 100px;
+        overflow: hidden;
+        background-color: #cccccc;
+    }
+    .show img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+}
