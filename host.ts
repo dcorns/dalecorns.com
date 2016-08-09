@@ -9,11 +9,11 @@
 
 import * as DbRunner from './dbRunner';
 import proc = require('child_process');
-
+const webRoot = process.argv[2] || '/public';
 DbRunner.startDb('mongo', function(err, data){
   if(err){
     throw new Error('It appears that no mongo database is installed');
   }
   console.log('MongoDB running in', data);
-  proc.fork('server');
+  proc.fork('server', [webRoot]);
 });
