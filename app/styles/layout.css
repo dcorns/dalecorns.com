@@ -80,7 +80,7 @@ table td{
     }
 
 }
-/*Was 500*/
+
 @media screen and (max-width: 800px){
     body{
         display: flex;
