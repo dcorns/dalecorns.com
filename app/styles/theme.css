@@ -62,18 +62,6 @@ button {
     width: 32px;
     display: inline-block;
 }
-.treehouse{
-    background-image: url("../icon/treehouse-32-black.png");
-    height: 32px;
-    width: 32px;
-    display: inline-block;
-}
-.coursera{
-    background-image: url("../icon/coursera-32-black.png");
-    height: 32px;
-    width: 32px;
-    display: inline-block;
-}
 
 input:invalid {
     background-color: var(--invalid_bg);

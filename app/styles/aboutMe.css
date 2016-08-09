@@ -1,0 +1,37 @@
+#aboutme{
+    margin: 0;
+}
+#aboutme p{
+line-height: 150%;
+}
+#aboutme h3{
+    font-size: 2.5rem;
+    margin-top: 1%;
+}
+#aboutme h3 + p{
+
+}
+#aboutme h4{
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1%;
+}
+
+#aboutme article{
+    text-align: justify;
+    margin: 0 3% 1%;
+}
+
+#aboutme .large-article p:nth-child(2){
+    column-count: 3;
+    column-gap: 20px;
+    column-rule-style: solid;
+    column-rule-color: #aaaaaa;
+}
+#aboutme .small-article{
+    width: 29%;
+    float: right;
+    margin-right: 1%;
+
+}
