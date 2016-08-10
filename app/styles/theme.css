@@ -31,37 +31,6 @@ button {
 .show{
     border-radius: 7pt;
 }
-.github{
-    background-image: url("../icon/GitHub-Mark-32px.png");
-    height: 32px;
-    width: 32px;
-    display: inline-block;
-
-}
-.linkdn{
-    background-image: url("../icon/linkedin-icon-logo-vector-32x32.png");
-    height: 32px;
-    width: 32px;
-    display: inline-block;
-}
-.twitter{
-    background-image: url("../icon/twitter-icon-circle-logo.png");
-    height: 32px;
-    width: 32px;
-    display: inline-block;
-}
-.googleplus{
-    background-image: url("../icon/optly_googleplus.png");
-    height: 32px;
-    width: 32px;
-    display: inline-block;
-}
-.youtube{
-    background-image: url("../icon/youtube_23.png");
-    height: 32px;
-    width: 32px;
-    display: inline-block;
-}
 
 input:invalid {
     background-color: var(--invalid_bg);
@@ -78,4 +47,8 @@ input:required {
 
 .hide{
     display: none;
+}
+
+a {
+    text-decoration: none;
 }
