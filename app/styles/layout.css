@@ -2,6 +2,10 @@
 
 
 /*At 500 eventually*/
+.icon{
+    width:32px;
+    height: 32px;
+}
 main{
     margin: 0;
     padding: 0;

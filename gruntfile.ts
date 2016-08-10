@@ -7,6 +7,7 @@
 'use strict';
 module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-add-view');
+  grunt.loadNpmTasks('grunt-svgstore');
   grunt.initConfig({
     add_view: {
       prod:{

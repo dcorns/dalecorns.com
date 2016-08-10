@@ -56,7 +56,7 @@ gulp.task('watcher', function(){
   gulp.watch('app/assets/**/*',['copyassets']);
   gulp.watch('app/index.html', function(){
     gulp.src(['app/index.html'])
-      .pipe(gulp.dest(__dirname));
+      .pipe(gulp.dest('Development'));
   });
   gulp.watch('app/styles/**/*',['build-css']);
   gulp.watch('app/views/**/*', ['grunt', 'webpack']);
