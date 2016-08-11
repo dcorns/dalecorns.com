@@ -94,7 +94,7 @@ table td{
 
 }
 
-@media screen and (max-width: 300px){
+@media screen and (max-width: 600px){
     body{
         display: flex;
         box-sizing: border-box;
@@ -109,7 +109,9 @@ table td{
         border-radius: 6pt;
         border-bottom: 2px solid var(--emph_color);
         width: 100%;
+        position: fixed;
     }
+
     h1{
         font-size: 25px;
     }
@@ -117,29 +119,43 @@ table td{
         font-size: 20px;
         display: inline-block;
     }
+
+    main{
+        margin-top: 35%;
+    }
     .page-nav{
         display: none;
     }
 
     .show{
         margin: 0;
-        max-width: 100px;
-        max-height: 100px;
+        max-width: 50px;
+        max-height: 50px;
         overflow: hidden;
         background-color: #cccccc;
     }
     .show img {
-        max-width: 100px;
-        max-height: 100px;
+        max-width: 50px;
+        max-height: 50px;
     }
     address{
         padding-top: 1.5%;
         padding-bottom: 1.5%;
-        background: green;
     }
     #btnMobileMenu{
         background-color: #00d6b2;
-        fill: grey;
-        align-self: stretch;
+        position: absolute;
+        top: 0;
+        left: 87%;
+    }
+    .basic-info{
+        width: 70%;
+        margin-left: .5%;
+    }
+    .basic-info aside{
+        font-size: .5rem;
+    }
+    .basic-info h3{
+        font-size:.8rem;
     }
 }
