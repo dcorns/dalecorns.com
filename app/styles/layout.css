@@ -2,10 +2,7 @@
 
 
 /*At 500 eventually*/
-.icon{
-    width:32px;
-    height: 32px;
-}
+
 main{
     margin: 0;
     padding: 0;
@@ -43,7 +40,7 @@ table td{
         width: 100%;
     }
     main {
-        margin-top: 200px;
+        margin-top: 230px;
         width: 83%;
         float: right;
         margin-right: 10px;
@@ -53,9 +50,21 @@ table td{
     }
     h2{
         font-size: 5em;
+        margin: 0;
+        padding: 0;
     }
     h3{
-        font-size: 3em;
+        font-size: 2em;
+        margin-bottom: 2%;
+        line-height: 20%;
+        padding: 0;
+    }
+    address{
+        width: 100%;
+        margin-top: 1%;
+    }
+    .basic-info{
+        margin-left: 1%;
     }
     .mobile-menu{
         display: none;
@@ -73,7 +82,7 @@ table td{
     .page-nav {
         position: fixed;
         z-index: -1;
-        top: 200px;
+        top: 220px;
         display: block;
         width: 14%;
         padding-top: 10px;
@@ -85,7 +94,7 @@ table td{
 
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 300px){
     body{
         display: flex;
         box-sizing: border-box;
@@ -123,5 +132,14 @@ table td{
         max-width: 100px;
         max-height: 100px;
     }
-
+    address{
+        padding-top: 1.5%;
+        padding-bottom: 1.5%;
+        background: green;
+    }
+    #btnMobileMenu{
+        background-color: #00d6b2;
+        fill: grey;
+        align-self: stretch;
+    }
 }

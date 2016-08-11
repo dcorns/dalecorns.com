@@ -14,6 +14,7 @@
 body{
     background-color: var(--body_bg_color);
     color: var(--font_color);
+    font-size: 20px;
 }
 header{
     background: linear-gradient(var(--main_border_color),var(--body_bg_color));
@@ -30,6 +31,7 @@ button {
 }
 .show{
     border-radius: 7pt;
+    box-shadow: 2px 2px 2px 1px darkslategrey;
 }
 
 input:invalid {
@@ -48,7 +50,30 @@ input:required {
 .hide{
     display: none;
 }
+.basic-info aside{
+    color:yellow;
+}
+
+.icon{
+    width:32px;
+    height: 32px;
+}
+.icon:hover{
+    fill: deepskyblue;
+}
+
+.icon:active{
+    fill: darkblue;
+}
 
 a {
     text-decoration: none;
+}
+
+address{
+    box-shadow: 2px 2px 2px 1px darkslategrey;
+    background-color: #3D4966;
+    border-style: groove;
+    border-color: darkblue;
+    padding-top: .5%;
 }
