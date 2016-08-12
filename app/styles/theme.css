@@ -14,7 +14,6 @@
 body{
     background-color: var(--body_bg_color);
     color: var(--font_color);
-    font-size: 20px;
 }
 header{
     background: linear-gradient(var(--main_border_color),var(--body_bg_color));
@@ -35,8 +34,7 @@ button {
     background-color: transparent;
 }
 .show{
-    border-radius: 7pt;
-    box-shadow: 2px 2px 2px 1px darkslategrey;
+    box-shadow: darkslategrey;
     background-color: #cccccc;
 }
 
@@ -50,21 +48,12 @@ input:valid {
 
 input:required {
     border-color: #800000;
-    border-width: 3px;
 }
 .show{
     background-color: #cccccc;
 }
-.hide{
-    display: none;
-}
 .basic-info aside{
     color:yellow;
-}
-
-.icon{
-    width:32px;
-    height: 32px;
 }
 .icon:hover{
     fill: deepskyblue;
@@ -83,11 +72,10 @@ a {
 }
 
 address{
-    box-shadow: 2px 2px 2px 1px darkslategrey;
+    box-shadow: darkslategrey;
     background-color: #3D4966;
     border-style: groove;
     border-color: darkblue;
-    padding-top: .5%;
 }
 #btnMobileMenu{
     background-color: #00d6b2;
