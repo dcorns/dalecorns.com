@@ -1,8 +1,6 @@
 /*Style Layout*/
 
 
-/*At 500 eventually*/
-
 main{
     margin: 0;
     padding: 0;
@@ -22,20 +20,16 @@ h3{
     height: 40px;
     width: 40px;
 }
-table tr{
-    border-bottom: black;
-    border-style: solid;
-}
 table td{
     padding:10px;
 }
-@media screen and (min-width: 800px) {
+
+@media screen and (min-width: 1265px) {
     header {
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
         border-radius: 6pt;
-        border-bottom: 2px solid var(--emph_color);
         position: fixed;
         width: 100%;
     }
@@ -76,7 +70,6 @@ table td{
         max-width: 150px;
         min-width: 150px;
         overflow: hidden;
-        background-color: #cccccc;
     }
 
     .page-nav {
@@ -88,11 +81,76 @@ table td{
         padding-top: 10px;
         height: 100%;
         border-radius: 6pt;
-        border-right: 2px solid var(--emph_color);
-        border-left: 2px solid var(--emph_color);
+        border-right: 2px;
+        border-left: 2px;
     }
 
 }
+
+
+@media screen and (max-width: 1264px){
+    header {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        border-radius: 6pt;
+        border-bottom: 2px;
+        position: fixed;
+        width: 100%;
+    }
+    main {
+        margin-top: 240px;
+        width: 83%;
+        float: right;
+        margin-right: 10px;
+    }
+    .top img {
+        width: 100%;
+    }
+    h2{
+        font-size: 5em;
+        margin: 0;
+        padding: 0;
+    }
+    h3{
+        font-size: 2em;
+        margin-bottom: 2%;
+        padding: 0;
+    }
+    address{
+        width: 100%;
+        margin-top: 1%;
+    }
+    .basic-info{
+        margin-left: 1%;
+    }
+    .mobile-menu{
+        display: none;
+    }
+    .show {
+        margin: 0;
+        min-height: 150px;
+        max-height: 150px;
+        max-width: 150px;
+        min-width: 150px;
+        overflow: hidden;
+    }
+
+    .page-nav {
+        position: fixed;
+        z-index: -1;
+        top: 220px;
+        display: block;
+        width: 14%;
+        padding-top: 10px;
+        height: 100%;
+        border-radius: 6pt;
+        border-right: 2px;
+        border-left: 2px;
+    }
+
+}
+
 
 @media screen and (max-width: 600px){
     body{
@@ -107,7 +165,7 @@ table td{
         justify-content: flex-start;
         flex-wrap: wrap;
         border-radius: 6pt;
-        border-bottom: 2px solid var(--emph_color);
+        border-bottom: 2px;
         width: 100%;
         position: fixed;
     }
@@ -132,7 +190,6 @@ table td{
         max-width: 50px;
         max-height: 50px;
         overflow: hidden;
-        background-color: #cccccc;
     }
     .show img {
         max-width: 50px;
@@ -143,7 +200,6 @@ table td{
         padding-bottom: 1.5%;
     }
     #btnMobileMenu{
-        background-color: #00d6b2;
         position: absolute;
         top: 0;
         left: 87%;
