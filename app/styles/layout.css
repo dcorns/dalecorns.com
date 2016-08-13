@@ -17,7 +17,7 @@
     }
     address{
         box-shadow: 2px 2px 2px 1px;
-        padding-top: .5%;
+        padding-top: 1%;
     }
     input:required{
         border-width: 3px;
@@ -50,7 +50,8 @@
         display: none;
     }
     .icon{
-        width:8%;
+        width:5vw;
+        height: 5vw;
     }
     .email{
         font-size: .7rem;
