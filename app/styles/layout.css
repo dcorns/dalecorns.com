@@ -2,27 +2,18 @@
 
 @media screen{
     html{
-        font-size: 16px;
+        font-size: 4vw;
         font-family: sans-serif;
     }
-    main{
+    main, h2, h3, h4{
         margin: 0;
         padding: 0;
     }
     h2{
-        font-size: 1.5rem;
-        margin: 0;
-        display: inline-block;
-        padding: 0;
+        font-size: 1.4rem;
     }
     h3{
-        display: inline-block;
         font-size: 1.2rem;
-        margin: 0;
-        padding: 0;
-    }
-    aside{
-        display: inline-block;
     }
     address{
         box-shadow: 2px 2px 2px 1px;
@@ -44,29 +35,28 @@
     .show img {
         border-radius: 7pt;
         box-shadow: 2px 2px 2px 1px;
-        width: 20%;
+        width: 15%;
     }
     .basic-info{
         margin-top: 1%;
-        width: 78%;
+        width: 82%;
         float: right;
         text-align: left;
     }
     .basic-info aside{
-        font-size: .7rem;
-    }
-    .basic-info h2 h3 aside{
-        display: inline-block;
+        font-size: .5rem;
     }
     .hide{
         display: none;
     }
     .icon{
-        width:32px;
-        height: 32px;
+        width:8%;
     }
     .email{
         font-size: .7rem;
+    }
+    .page-nav{
+        display: none;
     }
     #btnMobileMenu{
         float: right;
@@ -74,7 +64,20 @@
     }
 }
 
+/*@media screen and (min-width: 500px) {*/
+    /*html{*/
+        /*font-size: 22px;*/
+    /*}*/
+/*}*/
 
+/*@media screen and (min-width: 768px){*/
+    /*html{*/
+        /*font-size: 36px;*/
+    /*}*/
+    /*.basic-info aside{*/
+        /*font-size: .5rem;*/
+    /*}*/
+}
 /*@media screen and (min-width: 1265px) {*/
     /*header {*/
         /*display: flex;*/
