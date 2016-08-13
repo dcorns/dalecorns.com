@@ -11,17 +11,17 @@
     }
 
     #aboutme h3 {
-        font-size: 2.5rem;
+        font-size: 1rem;
         margin-top: 1%;
         text-align: center;
     }
 
-    #aboutme h3 + p {
-
+    #aboutme p {
+        font-size: .5rem;
     }
 
     #aboutme h4 {
-        font-size: 1.5rem;
+        font-size: .75rem;
         text-align: center;
         margin-top: 0;
         margin-bottom: 1%;
