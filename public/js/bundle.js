@@ -410,7 +410,7 @@
 
 	var header = document.getElementById('top');
 	//default view
-	route('#/current');
+	route('#/aboutMe');
 
 	header.addEventListener('mouseover', function(){
 	  slideShow.play(3000);
@@ -424,7 +424,7 @@
 	    route(lastHref);
 	  }
 	  else {//load home template
-	    lastHref = '#/current';
+	    lastHref = '#/aboutMe';
 	    window.sessionStorage.setItem('href', lastHref);
 	    window.history.pushState(null, null, lastHref);
 	    route(lastHref);
@@ -451,10 +451,10 @@
 	var btnMobileMenu = document.getElementById('btnMobileMenu');
 	var mobileMenu = document.getElementById('mobile-menu-items');
 	btnMobileMenu.addEventListener('click', function(){
-	  mySkills.help.toggleClass([mobileMenu, btnMobileMenu], 'toggle-menu');
+	  mySkills.help.toggleClass([mobileMenu], 'toggle-menu');
 	});
 	mobileMenu.addEventListener('click', function(e){
-	  mySkills.help.toggleClass([mobileMenu, btnMobileMenu], 'toggle-menu');
+	  mySkills.help.toggleClass([mobileMenu], 'toggle-menu');
 	});
 
 	function winready(f){
