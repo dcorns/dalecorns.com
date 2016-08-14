@@ -1,4 +1,4 @@
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 768px) {
     #aboutme {
         margin-right: 1.75%;
         padding: 0;
@@ -29,11 +29,10 @@
 
     #aboutme article {
         text-align: justify;
-        margin-top: 3%;
     }
 
     #aboutme .large-article p:nth-child(2) {
-        column-count: 3;
+        column-count: 2;
         column-gap: 20px;
         column-rule-style: solid;
         column-rule-color: #aaaaaa;

@@ -5,7 +5,16 @@
         font-size: 4vw;
         font-family: sans-serif;
     }
-    main, h2, h3, h4{
+    header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+    }
+    main{
+        margin-top: 30%;
+        padding: 0;
+    }
+    h2, h3, h4{
         margin: 0;
         padding: 0;
     }
@@ -25,9 +34,8 @@
     .toggle-menu{
         display: none;
     }
-    .img-btn{
-        height: 40px;
-        width: 40px;
+    .btn-nav{
+        margin-right: 1%;
     }
     .show{
         display: inline;
@@ -50,8 +58,8 @@
         display: none;
     }
     .icon{
-        width:5vw;
-        height: 5vw;
+        width: 7vw;
+        height: 7vw;
     }
     .email{
         font-size: .7rem;
