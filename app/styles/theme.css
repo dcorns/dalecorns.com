@@ -56,7 +56,6 @@ input:required {
 }
 .show{
     box-shadow: darkslategrey;
-    background-color: #cccccc;
 }
 .page-nav{
     border-right: solid var(--emph_color);
