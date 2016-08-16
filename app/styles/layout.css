@@ -11,7 +11,7 @@
         top: 0;
     }
     main{
-        margin-top: 30%;
+        margin-top: 24%;
         padding: 0;
     }
     h2, h3, h4{
@@ -27,6 +27,12 @@
     address{
         box-shadow: 2px 2px 2px 1px;
         padding-top: 1%;
+
+    }
+    a{
+        display: inline-block;
+        width: .75rem;
+        height: .75rem;
     }
     input:required{
         border-width: 3px;
@@ -62,17 +68,44 @@
         height: 7vw;
     }
     .email{
-        font-size: 4vw;
+        font-size: .75rem;
     }
     .page-nav{
         display: none;
     }
     #btnMobileMenu{
         float: right;
-        top: 0;
+    }
+    .icon {
+        width: .75rem;
+        height: .75rem;
+        margin: .1rem;
+    }
+    address {
+        height: 1rem;
+        padding: 0;
     }
 }
-
+@media screen and (min-width: 768px) {
+    /*main {*/
+        /*margin-top: 24%;*/
+    /*}*/
+    /*.icon{*/
+        /*width: 4vw;*/
+        /*height: 4vw;*/
+    /*}*/
+}
+@media screen and (min-width: 1300px) {
+    /*.icon {*/
+        /*width: .75rem;*/
+        /*height: .75rem;*/
+        /*margin: .1rem;*/
+    /*}*/
+    /*address {*/
+        /*height: 1rem;*/
+        /*padding: 0;*/
+    /*}*/
+}
 /*@media screen and (min-width: 500px) {*/
     /*html{*/
         /*font-size: 22px;*/
