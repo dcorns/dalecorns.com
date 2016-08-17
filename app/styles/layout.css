@@ -25,9 +25,9 @@
         font-size: 1.2rem;
     }
     address{
+        height: 2%;
         box-shadow: 2px 2px 2px 1px;
-        padding-top: 1%;
-
+        padding: 0;
     }
     a{
         display: inline-block;
@@ -44,17 +44,20 @@
         margin-right: 1%;
     }
     .show{
-        display: inline;
+        display: inline-block;
+        width: 8%;
+        vertical-align: top;
     }
     .show img {
         border-radius: 7pt;
         box-shadow: 2px 2px 2px 1px;
-        width: 15%;
+        max-width: 100%;
     }
     .basic-info{
         margin-top: 1%;
         width: 82%;
-        float: right;
+        height: 60%;
+        display: inline-block;
         text-align: left;
     }
     .basic-info aside{
@@ -63,9 +66,10 @@
     .hide{
         display: none;
     }
-    .icon{
-        width: 7vw;
-        height: 7vw;
+    .icon {
+        max-width: 100%;
+        max-height: 100%;
+        margin-top: 30%;
     }
     .email{
         font-size: .75rem;
@@ -74,240 +78,7 @@
         display: none;
     }
     #btnMobileMenu{
+        display:none;
         float: right;
     }
-    .icon {
-        width: .75rem;
-        height: .75rem;
-        margin: .1rem;
-    }
-    address {
-        height: 1rem;
-        padding: 0;
-    }
 }
-@media screen and (min-width: 768px) {
-    /*main {*/
-        /*margin-top: 24%;*/
-    /*}*/
-    /*.icon{*/
-        /*width: 4vw;*/
-        /*height: 4vw;*/
-    /*}*/
-}
-@media screen and (min-width: 1300px) {
-    /*.icon {*/
-        /*width: .75rem;*/
-        /*height: .75rem;*/
-        /*margin: .1rem;*/
-    /*}*/
-    /*address {*/
-        /*height: 1rem;*/
-        /*padding: 0;*/
-    /*}*/
-}
-/*@media screen and (min-width: 500px) {*/
-    /*html{*/
-        /*font-size: 22px;*/
-    /*}*/
-/*}*/
-
-/*@media screen and (min-width: 768px){*/
-    /*html{*/
-        /*font-size: 36px;*/
-    /*}*/
-    /*.basic-info aside{*/
-        /*font-size: .5rem;*/
-    /*}*/
-}
-/*@media screen and (min-width: 1265px) {*/
-    /*header {*/
-        /*display: flex;*/
-        /*justify-content: flex-start;*/
-        /*flex-wrap: wrap;*/
-        /*border-radius: 6pt;*/
-        /*position: fixed;*/
-        /*width: 100%;*/
-    /*}*/
-    /*main {*/
-        /*margin-top: 230px;*/
-        /*width: 83%;*/
-        /*float: right;*/
-        /*margin-right: 10px;*/
-    /*}*/
-    /*.top img {*/
-        /*width: 100%;*/
-    /*}*/
-    /*h2{*/
-        /*font-size: 5em;*/
-        /*margin: 0;*/
-        /*padding: 0;*/
-    /*}*/
-    /*h3{*/
-        /*font-size: 2em;*/
-        /*margin-bottom: 2%;*/
-        /*line-height: 20%;*/
-        /*padding: 0;*/
-    /*}*/
-    /*address{*/
-        /*width: 100%;*/
-        /*margin-top: 1%;*/
-    /*}*/
-    /*.basic-info{*/
-        /*margin-left: 1%;*/
-    /*}*/
-    /*.mobile-menu{*/
-        /*display: none;*/
-    /*}*/
-    /*.show {*/
-        /*margin: 0;*/
-        /*min-height: 150px;*/
-        /*max-height: 150px;*/
-        /*max-width: 150px;*/
-        /*min-width: 150px;*/
-        /*overflow: hidden;*/
-    /*}*/
-
-    /*.page-nav {*/
-        /*position: fixed;*/
-        /*z-index: -1;*/
-        /*top: 220px;*/
-        /*display: block;*/
-        /*width: 14%;*/
-        /*padding-top: 10px;*/
-        /*height: 100%;*/
-        /*border-radius: 6pt;*/
-        /*border-right: 2px;*/
-        /*border-left: 2px;*/
-    /*}*/
-
-/*}*/
-
-
-/*@media screen and (max-width: 1264px){*/
-    /*header {*/
-        /*display: flex;*/
-        /*justify-content: flex-start;*/
-        /*flex-wrap: wrap;*/
-        /*border-radius: 6pt;*/
-        /*border-bottom: 2px;*/
-        /*position: fixed;*/
-        /*width: 100%;*/
-    /*}*/
-    /*main {*/
-        /*margin-top: 240px;*/
-        /*width: 83%;*/
-        /*float: right;*/
-        /*margin-right: 10px;*/
-    /*}*/
-    /*.top img {*/
-        /*width: 100%;*/
-    /*}*/
-    /*h2{*/
-        /*font-size: 5em;*/
-        /*margin: 0;*/
-        /*padding: 0;*/
-    /*}*/
-    /*h3{*/
-        /*font-size: 2em;*/
-        /*margin-bottom: 2%;*/
-        /*padding: 0;*/
-    /*}*/
-    /*address{*/
-        /*width: 100%;*/
-        /*margin-top: 1%;*/
-    /*}*/
-    /*.basic-info{*/
-        /*margin-left: 1%;*/
-    /*}*/
-    /*.mobile-menu{*/
-        /*display: none;*/
-    /*}*/
-    /*.show {*/
-        /*margin: 0;*/
-        /*min-height: 150px;*/
-        /*max-height: 150px;*/
-        /*max-width: 150px;*/
-        /*min-width: 150px;*/
-        /*overflow: hidden;*/
-    /*}*/
-
-    /*.page-nav {*/
-        /*position: fixed;*/
-        /*z-index: -1;*/
-        /*top: 220px;*/
-        /*display: block;*/
-        /*width: 14%;*/
-        /*padding-top: 10px;*/
-        /*height: 100%;*/
-        /*border-radius: 6pt;*/
-        /*border-right: 2px;*/
-        /*border-left: 2px;*/
-    /*}*/
-
-/*}*/
-
-
-/*@media screen and (max-width: 600px){*/
-    /*body{*/
-        /*display: flex;*/
-        /*box-sizing: border-box;*/
-        /*flex-direction: column;*/
-        /*justify-content: flex-start;*/
-
-    /*}*/
-    /*header {*/
-        /*display: flex;*/
-        /*justify-content: flex-start;*/
-        /*flex-wrap: wrap;*/
-        /*border-radius: 6pt;*/
-        /*border-bottom: 2px;*/
-        /*width: 100%;*/
-        /*position: fixed;*/
-    /*}*/
-
-    /*h1{*/
-        /*font-size: 25px;*/
-    /*}*/
-    /*h2{*/
-        /*font-size: 20px;*/
-        /*display: inline-block;*/
-    /*}*/
-
-    /*main{*/
-        /*margin-top: 35%;*/
-    /*}*/
-    /*.page-nav{*/
-        /*display: none;*/
-    /*}*/
-
-    /*.show{*/
-        /*margin: 0;*/
-        /*max-width: 50px;*/
-        /*max-height: 50px;*/
-        /*overflow: hidden;*/
-    /*}*/
-    /*.show img {*/
-        /*max-width: 50px;*/
-        /*max-height: 50px;*/
-    /*}*/
-    /*address{*/
-        /*padding-top: 1.5%;*/
-        /*padding-bottom: 1.5%;*/
-    /*}*/
-    /*#btnMobileMenu{*/
-        /*position: absolute;*/
-        /*top: 0;*/
-        /*left: 87%;*/
-    /*}*/
-    /*.basic-info{*/
-        /*width: 70%;*/
-        /*margin-left: .5%;*/
-    /*}*/
-    /*.basic-info aside{*/
-        /*font-size: .5rem;*/
-    /*}*/
-    /*.basic-info h3{*/
-        /*font-size:.8rem;*/
-    /*}*/
-/*}*/
