@@ -434,7 +434,10 @@
 	  var idx = 0, ln = links.length;
 	  for (idx; idx < ln; idx++) {
 	    links[idx].addEventListener('click', function (e) {
-	      window.sessionStorage.setItem('href', this.href);
+	      //if the link is local routing link, save location for when returning to the site...filters out external links
+	      if(this.href.slice(0,1) === '#'){
+	        window.sessionStorage.setItem('href', this.href);
+	      }
 	      window.history.pushState(null, null, this.href);
 	      e.preventDefault();
 	      route(this.href);
