@@ -25,14 +25,14 @@
         font-size: 1.2rem;
     }
     address{
-        height: 2%;
         box-shadow: 2px 2px 2px 1px;
-        padding: 0;
+        padding: 1% 1%;
     }
-    a{
+    address a{
         display: inline-block;
-        width: .75rem;
-        height: .75rem;
+        width: 5vw;
+        height: 5vw;
+        vertical-align: middle;
     }
     input:required{
         border-width: 3px;
@@ -55,10 +55,14 @@
     }
     .basic-info{
         margin-top: 1%;
+        margin-left: 2%;
         width: 82%;
         height: 60%;
         display: inline-block;
         text-align: left;
+    }
+    .basic-info h2{
+        display: inline-block;
     }
     .basic-info aside{
         font-size: .5rem;
@@ -67,12 +71,15 @@
         display: none;
     }
     .icon {
+        /*width: 5vw;*/
+        /*height: 5vw;*/
+        /*margin: 2vw;*/
         max-width: 100%;
         max-height: 100%;
-        margin-top: 30%;
     }
     .email{
-        font-size: .75rem;
+        display: inline-block;
+        font-size: 3vw;
     }
     .page-nav{
         display: none;
