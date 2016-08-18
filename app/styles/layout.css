@@ -71,15 +71,12 @@
         display: none;
     }
     .icon {
-        /*width: 5vw;*/
-        /*height: 5vw;*/
-        /*margin: 2vw;*/
         max-width: 100%;
         max-height: 100%;
     }
     .email{
         display: inline-block;
-        font-size: 3vw;
+        font-size: .8rem;
     }
     .page-nav{
         display: none;
@@ -87,5 +84,21 @@
     #btnMobileMenu{
         display:none;
         float: right;
+    }
+}
+
+@media screen and (min-width: 800px){
+    html{
+        font-size: 2vw;
+    }
+    address{
+        padding: 0;
+    }
+    address a{
+        width: 2vw;
+        height: 2vw;
+    }
+    main{
+        margin-top: 13%;
     }
 }
