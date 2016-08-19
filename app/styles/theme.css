@@ -73,6 +73,10 @@ input:required {
 .icon:active{
     fill: darkblue;
 }
+.page-nav{
+    border-right:solid var(--emph_color);
+    border-left:solid var(--emph_color);
+}
 #btnMobileMenu{
     background-color: #00d6b2;
 }
