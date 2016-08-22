@@ -117,4 +117,7 @@
     .page-nav a{
         display: inline-block;
     }
+    .mobile-menu{
+        display: none;
+    }
 }
