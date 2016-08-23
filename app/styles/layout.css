@@ -100,22 +100,21 @@
     }
     main{
         margin-top: 13%;
-        margin-left: 16%;
+        margin-left: 13%;
     }
     .page-nav {
         position: fixed;
-        z-index: -1;
-        top: 24%;
+        /*top: 24%;*/
         display: block;
-        width: 14%;
-        padding-top: 10px;
-        height: 100%;
+        width: 12%;
+        /*padding-top: 10px;*/
+        /*height: 100%;*/
         border-radius: 6pt;
         border-right: 2px;
         border-left: 2px;
     }
-    .page-nav a{
-        display: inline-block;
+    .page-nav svg{
+        height: 3vw;
     }
     .mobile-menu{
         display: none;
