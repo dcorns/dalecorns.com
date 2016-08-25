@@ -33,6 +33,7 @@ header.addEventListener('mouseover', function(){
 });
 
 function firstDo(){
+  console.log('firstDo');
   //Handle Refresh by checking session storage for last href and redirecting if it exists
   var lastHref = window.sessionStorage.getItem('href');
   var netAction = window.sessionStorage.getItem('netAction');
@@ -50,8 +51,8 @@ function firstDo(){
   var idx = 0, ln = links.length;
   for (idx; idx < ln; idx++) {
     links[idx].addEventListener('click', function (e) {
-      //if the link is local routing link, save location for when returning to the site...filters out external links
-      if(this.href.slice(0,1) === '#'){
+      //if the link is local routing link, save location for when returning to the site...filters out external links based on the presence of #/
+      if(this.href.indexOf('#/') > -1){
         window.sessionStorage.setItem('href', this.href);
       }
       window.history.pushState(null, null, this.href);
