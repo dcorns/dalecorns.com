@@ -417,6 +417,7 @@
 	});
 
 	function firstDo(){
+	  console.log('firstDo');
 	  //Handle Refresh by checking session storage for last href and redirecting if it exists
 	  var lastHref = window.sessionStorage.getItem('href');
 	  var netAction = window.sessionStorage.getItem('netAction');
@@ -434,8 +435,8 @@
 	  var idx = 0, ln = links.length;
 	  for (idx; idx < ln; idx++) {
 	    links[idx].addEventListener('click', function (e) {
-	      //if the link is local routing link, save location for when returning to the site...filters out external links
-	      if(this.href.slice(0,1) === '#'){
+	      //if the link is local routing link, save location for when returning to the site...filters out external links based on the presence of #/
+	      if(this.href.indexOf('#/') > -1){
 	        window.sessionStorage.setItem('href', this.href);
 	      }
 	      window.history.pushState(null, null, this.href);
@@ -729,10 +730,9 @@
 	}
 	function buildActivityTable(data, tbl){
 	  //Sort by start date using custom sort compare function
+	  data = data.json;
 	  data.sort(function(a, b){
-	    if(a.startDate > b.startDate) return 1;
-	    if(a.startDate < b.startDate) return -1;
-	    return 0;
+	    return new Date(a.startDate) - new Date(b.startDate);
 	  });
 	  var len = data.length;
 	  var c = 0;
