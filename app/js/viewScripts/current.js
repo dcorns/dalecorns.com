@@ -29,10 +29,9 @@ function appendActivity(aObj, tbl){
 }
 function buildActivityTable(data, tbl){
   //Sort by start date using custom sort compare function
+  data = data.json;
   data.sort(function(a, b){
-    if(a.startDate > b.startDate) return 1;
-    if(a.startDate < b.startDate) return -1;
-    return 0;
+    return new Date(a.startDate) - new Date(b.startDate);
   });
   var len = data.length;
   var c = 0;
