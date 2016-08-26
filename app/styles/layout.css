@@ -28,7 +28,7 @@
         box-shadow: 2px 2px 2px 1px;
         padding: 1% 1%;
     }
-    address a{
+    address a, span{
         display: inline-block;
         width: 5vw;
         height: 5vw;
@@ -39,9 +39,6 @@
     }
     .toggle-menu{
         display: none;
-    }
-    .btn-nav{
-        margin-right: 1%;
     }
     .show{
         display: inline-block;
@@ -81,10 +78,6 @@
     .page-nav{
         display: none;
     }
-    #btnMobileMenu{
-        display:none;
-        float: right;
-    }
 }
 
 @media screen and (min-width: 800px){
@@ -118,5 +111,8 @@
     }
     .mobile-menu{
         display: none;
+    }
+    .btn-nav{
+        display:none;
     }
 }
