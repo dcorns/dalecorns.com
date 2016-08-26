@@ -410,7 +410,7 @@
 
 	var header = document.getElementById('top');
 	//default view
-	route('#/aboutMe');
+	route('#/current');
 
 	header.addEventListener('mouseover', function(){
 	  slideShow.play(3000);
@@ -425,7 +425,7 @@
 	    route(lastHref);
 	  }
 	  else {//load home template
-	    lastHref = '#/aboutMe';
+	    lastHref = '#/current';
 	    window.sessionStorage.setItem('href', lastHref);
 	    window.history.pushState(null, null, lastHref);
 	    route(lastHref);
