@@ -24,6 +24,17 @@ function appendActivity(aObj, tbl){
   var activity = document.createElement('td');
   startDate.innerText = new Date(aObj.startDate).toLocaleDateString();
   activity.innerText = aObj.activity;
+
+  if(aObj.link){
+    var anchor = document.createElement('a'), anchorIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg'), anchorUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    anchor.href = aObj.link;
+    anchorIcon.setAttribute('class', 'icon');
+    anchorUse.setAttributeNS('http://www.w3.org/1999/xlink', 'href','#icon-link');
+    anchorIcon.appendChild(anchorUse);
+    anchor.appendChild(anchorIcon);
+    activityLink.appendChild(anchor);
+  }
+
   row.appendChild(activity);
   row.appendChild(activityLink);
   row.appendChild(startDate);

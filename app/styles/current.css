@@ -10,13 +10,25 @@
 }
 #current td{
     text-align: left;
+    width: 5vw;
+    height: 5vw;
 }
 #current td:nth-child(1){
     background-color: #ddffdd;
 }
 #current td:nth-child(2){
     background-color: #ddffa3;
+    width: 5%;
 }
 #current td:nth-child(3){
     background-color: #ddffdd;
+}
+#current .icon{
+    fill: green;
+}
+#current .icon:hover{
+    fill: deepskyblue;
+}
+#current.icon:active{
+    fill: darkblue;
 }

@@ -91,6 +91,10 @@
         width: 2vw;
         height: 2vw;
     }
+    #current td{
+        width: 2vw;
+        height: 2vw;
+    }
     main{
         margin-top: 13%;
         margin-left: 13%;
