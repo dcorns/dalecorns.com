@@ -20,10 +20,12 @@ module.exports = function current(){
 function appendActivity(aObj, tbl){
   var row = document.createElement('tr');
   var startDate = document.createElement('td');
+  var activityLink = document.createElement('td');
   var activity = document.createElement('td');
   startDate.innerText = new Date(aObj.startDate).toLocaleDateString();
   activity.innerText = aObj.activity;
   row.appendChild(activity);
+  row.appendChild(activityLink);
   row.appendChild(startDate);
   tbl.appendChild(row);
 }

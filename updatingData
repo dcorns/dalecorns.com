@@ -1,0 +1,6 @@
+rhc port-forward -a <appname>
+use mongo -port <forwardPort>
+OR just use the mongo interface in webstorm and skip the mongo lessons
+>use drc
+>db.collection.insert({})
+>db.collection.update({},{})
