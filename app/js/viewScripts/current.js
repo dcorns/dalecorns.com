@@ -7,21 +7,23 @@
 var clientRoutes = require('../clientRoutes')();
 module.exports = function current(){
   var tblActivity = document.getElementById('tbl-activity');
+  var tblComplete = document.getElementById('tbl-complete');
   clientRoutes.getData('current', function(err, data){
     if(err){
       alert('No current data stored locally. Internet connection required');
       console.error(err);
       return;
     }
-    buildActivityTable(data, tblActivity);
+    buildActivityTable(data, tblActivity, tblComplete);
   });
 };
 
-function appendActivity(aObj, tbl){
+function appendActivity(aObj, tbl, isComplete){
   var row = document.createElement('tr');
   var startDate = document.createElement('td');
   var activityLink = document.createElement('td');
   var activity = document.createElement('td');
+  var endDate = isComplete ? document.createElement('td') : null;
   startDate.innerText = new Date(aObj.startDate).toLocaleDateString();
   activity.innerText = aObj.activity;
 
@@ -38,9 +40,13 @@ function appendActivity(aObj, tbl){
   row.appendChild(activity);
   row.appendChild(activityLink);
   row.appendChild(startDate);
+  if(endDate){
+    endDate.innerText = new Date(aObj.endDate).toLocaleDateString();
+    row.appendChild(endDate);
+  }
   tbl.appendChild(row);
 }
-function buildActivityTable(data, tbl){
+function buildActivityTable(data, tblNow, tblOld){
   //Sort by start date using custom sort compare function
   data = data.json;
   data.sort(function(a, b){
@@ -50,7 +56,10 @@ function buildActivityTable(data, tbl){
   var c = 0;
   for(c; c < len; c++){
     if(!(data[c].endDate)){
-      appendActivity(data[c], tbl);
+      appendActivity(data[c], tblNow, false);
+    }
+    else{
+      appendActivity(data[c], tblOld, true);
     }
   }
 }
