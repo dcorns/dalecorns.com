@@ -48,3 +48,10 @@ set fire base rules wide open
   }
 }
 ```
+####Development Flow
+For development gulp and grunt is used. Gulp is used to call grunt indirectly.
+#####Gulp Tasks
+######watcher
+Running `gulp watcher` will insure that all the css is converted from 4 to 3 and combined into one file, insure that the all the Java Script is converted from ES6 to 5 and combined into one file, insures that all the html views are converted to JavaScript, and keeps Development/index.html in up to date with app/index.html.
+####Deployment
+`gulp ship` transfers the contents of Development to public for git deployment to openshift `git push openshift master`
