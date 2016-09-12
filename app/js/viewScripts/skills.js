@@ -15,9 +15,9 @@ module.exports = function skills(){
     h = document.getElementById('skHeader');
 
   function goBackToSkillsMenu(){
-    btns.classList.toggle('toggle-menu');
-    h.classList.toggle('toggle-menu');
-    btnreturn.classList.toggle('toggle-menu');
+    btns.classList.toggle('hide');
+    h.classList.toggle('hide');
+    btnreturn.classList.toggle('hide');
     exampleList.textContent = '';
   }
 
@@ -33,10 +33,10 @@ module.exports = function skills(){
   btnreturn.addEventListener('click', goBackToSkillsMenu);
 
   btns.addEventListener('click', function(e){
-    btnreturn.classList.toggle('toggle-menu');
+    btnreturn.classList.toggle('hide');
     var skill = e.target.textContent;
-    btns.classList.toggle('toggle-menu');
-    h.classList.toggle('toggle-menu');
+    btns.classList.toggle('hide');
+    h.classList.toggle('hide');
     if(e.target.id === 'lang-fram-btns') skill = '';
 
 

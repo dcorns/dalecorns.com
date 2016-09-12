@@ -37,7 +37,7 @@
     input:required{
         border-width: 3px;
     }
-    .toggle-menu{
+    .hide {
         display: none;
     }
     .show{

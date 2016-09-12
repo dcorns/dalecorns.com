@@ -23,10 +23,9 @@ function appendActivity(aObj, tbl, isComplete){
   var startDate = document.createElement('td');
   var activityLink = document.createElement('td');
   var activity = document.createElement('td');
+  activity.innerText = aObj.activity;
   var endDate = isComplete ? document.createElement('td') : null;
   startDate.innerText = new Date(aObj.startDate).toLocaleDateString();
-  activity.innerText = aObj.activity;
-
   if(aObj.link){
     var anchor = document.createElement('a'), anchorIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg'), anchorUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
     anchor.href = aObj.link;
@@ -44,8 +43,12 @@ function appendActivity(aObj, tbl, isComplete){
     endDate.innerText = new Date(aObj.endDate).toLocaleDateString();
     row.appendChild(endDate);
   }
+  if(aObj['details']){
+    addDetails(row, aObj.details);
+  }
   tbl.appendChild(row);
 }
+
 function buildActivityTable(data, tblNow, tblOld){
   //Sort by start date using custom sort compare function
   data = data.json;
@@ -62,4 +65,29 @@ function buildActivityTable(data, tblNow, tblOld){
       appendActivity(data[c], tblOld, true);
     }
   }
+}
+//addDetails
+//Uses the activity-detail element from current.html and the hide class from layout.css
+//Receives a tr element and activity details text
+//prepends a button to click for details on the first td of the tr and adds an event listener to display or hide the details below the row when the button is clicked.
+function addDetails(rowIn, details){
+  let btn = document.createElement('button');
+  btn.textContent = '*';
+  rowIn.setAttribute('data-details', details);
+
+  btn.addEventListener('click', function(){
+    let detailSection = document.getElementById('activity-detail');
+    detailSection.classList.toggle('hide');
+    if(!(detailSection.classList.contains('hide'))){
+      let row = this.parentNode.parentNode;
+      let rect = row.getBoundingClientRect();
+      console.dir(rect);
+      detailSection.style.left = `${rect.left}px`;
+      detailSection.style.top = `${rect.top + rect.height}px`;
+      detailSection.style.width = `${rect.width}px`;
+      detailSection.innerHTML=row.getAttribute('data-details');
+    }
+  });
+  rowIn.childNodes[0].insertBefore(btn, rowIn.childNodes[0].childNodes[0]);
+  //rowIn.childNodes[0].innerHTML = btn.outerHTML + rowIn.childNodes[0].innerHTML;
 }

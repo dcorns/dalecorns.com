@@ -35,3 +35,10 @@
 #current.icon:active{
     fill: darkblue;
 }
+#activity-detail{
+    position:absolute;
+    background-color: #ddffdd;
+}
+#current button{
+    background-color: #8ECBE3;
+}

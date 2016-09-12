@@ -71,10 +71,10 @@ function firstDo(){
 var btnMobileMenu = document.getElementById('btnMobileMenu');
 var mobileMenu = document.getElementById('mobile-menu-items');
 btnMobileMenu.addEventListener('click', function(){
-  mySkills.help.toggleClass([mobileMenu], 'toggle-menu');
+  mySkills.help.toggleClass([mobileMenu], 'hide');
 });
 mobileMenu.addEventListener('click', function(e){
-  mySkills.help.toggleClass([mobileMenu], 'toggle-menu');
+  mySkills.help.toggleClass([mobileMenu], 'hide');
 });
 
 function winready(f){
