@@ -33,7 +33,6 @@ header.addEventListener('mouseover', function(){
 });
 
 function firstDo(){
-  console.log('firstDo');
   //Handle Refresh by checking session storage for last href and redirecting if it exists
   var lastHref = window.sessionStorage.getItem('href');
   var netAction = window.sessionStorage.getItem('netAction');
