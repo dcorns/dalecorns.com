@@ -37,8 +37,12 @@
 }
 #activity-detail{
     position: absolute;
-    background-color: #ddffdd;
+    color: deepskyblue;
+    background-color: darkgreen;
+    border: inset 2px whitesmoke;
 }
 #current button{
     background-color: #8ECBE3;
+    border-radius: 50%;
+    text-align: center;
 }
