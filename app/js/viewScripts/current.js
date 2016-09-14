@@ -82,8 +82,8 @@ function addDetails(rowIn, details){
       let row = this.parentNode.parentNode;
       let rect = row.getBoundingClientRect();
       console.dir(rect);
-      detailSection.style.left = `${rect.left}px`;
-      detailSection.style.top = `${rect.top + rect.height}px`;
+      detailSection.style.left = `${rect.left + scrollX}px`;
+      detailSection.style.top = `${rect.top + rect.height + scrollY}px`;
       detailSection.style.width = `${rect.width}px`;
       detailSection.innerHTML=row.getAttribute('data-details');
     }
