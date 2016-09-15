@@ -21,8 +21,8 @@ console.log('webRoot:', webRoot);
 app.use(express.static(__dirname + webRoot));
 
 app.get('/', function (req, res) {
-  res.setHeader('Content-Security-Policy', "script-src 'self';" +
-    "style-src 'self'");
+  // res.setHeader('Content-Security-Policy', "script-src 'self';" +
+  //   "style-src 'self'");
   res.status(200);
   res.header('Content-Type', 'text/html');
   res.sendFile('index.html');
