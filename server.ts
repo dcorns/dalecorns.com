@@ -15,9 +15,10 @@ let app = express();
 let server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 let server_port = process.env.HTTP_PORT || 3000;
 let server;
+let path = require('path');
 //Serve static assets from public
 const webRoot = process.argv[2] || '/public';
-app.use(express.static(__dirname + webRoot));
+app.use(express.static(path.join(__dirname, webRoot)));
 
 app.get('/', function (req, res) {
   res.setHeader('Content-Security-Policy', "script-src 'self';" +
