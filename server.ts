@@ -21,6 +21,7 @@ const webRoot = process.argv[2] || '/public';
 app.use(express.static(path.join(__dirname, webRoot)));
 
 app.get('/', function (req, res) {
+  console.log('get request');
   res.setHeader('Content-Security-Policy', "script-src 'self';" +
     "style-src 'self'");
   res.status(200);
