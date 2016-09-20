@@ -92,7 +92,7 @@ function addDetails(rowIn, details){
       detailSection.style.top = `${rect.top + rect.height + scrollY}px`;
       detailSection.style.width = `${rect.width}px`;
       detailSection.innerHTML=row.getAttribute('data-details');
-      detailSection.scrollIntoView();
+      //detailSection.scrollIntoView();
     }
   });
   rowIn.childNodes[0].insertBefore(btn, rowIn.childNodes[0].childNodes[0]);
