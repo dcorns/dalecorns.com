@@ -241,6 +241,14 @@ module.exports = function(app){
       }
     });
   });
+
+  app.get('/currentCategoryMenu', function(req, res, next){
+    corngoose.getCollection('appMenus', function(err, data){
+      res.status(200);
+      res.contentType = 'json';
+      res.send(data);
+    });
+  });
 };
 
 function playErr(res, err){

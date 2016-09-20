@@ -35,7 +35,6 @@ gulp.task('copyassets', function(){
   gulp.src(['app/assets/**/*'])
     .pipe(gulp.dest('Development'));
 });
-
 gulp.task('dev-server', function(){
   const cp = childProcess('node', ['host', '/Development']);
   cp.stdout.on('data', function(data){

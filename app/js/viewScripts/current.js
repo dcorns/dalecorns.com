@@ -16,6 +16,13 @@ module.exports = function current(){
     }
     buildActivityTable(data, tblActivity, tblComplete);
   });
+  clientRoutes.getData('currentCategoryMenu', function(err, data){
+    if(err){
+      console.error(err);
+      return;
+    }
+    buildMenu(data.json[0].activityCategories, document.getElementById('menu-activities-category'));
+  });
 };
 
 function appendActivity(aObj, tbl, isComplete){
@@ -53,7 +60,7 @@ function buildActivityTable(data, tblNow, tblOld){
   //Sort by start date using custom sort compare function
   data = data.json;
   data.sort(function(a, b){
-    return new Date(a.startDate) - new Date(b.startDate);
+    return new Date(b.startDate) - new Date(a.startDate);
   });
   var len = data.length;
   var c = 0;
@@ -90,4 +97,15 @@ function addDetails(rowIn, details){
   });
   rowIn.childNodes[0].insertBefore(btn, rowIn.childNodes[0].childNodes[0]);
   //rowIn.childNodes[0].innerHTML = btn.outerHTML + rowIn.childNodes[0].innerHTML;
+}
+
+function buildMenu(data, menuElement){
+  var menuCount = 0;
+  data.forEach(function(item){
+    let btn = document.createElement('button');
+    btn.textContent = item;
+    btn.value = menuCount;
+    console.dir(btn.value);
+    menuCount++;
+  });
 }
