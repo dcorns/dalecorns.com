@@ -8,6 +8,11 @@ var clientRoutes = require('../clientRoutes')();
 module.exports = function current(){
   var tblActivity = document.getElementById('tbl-activity');
   var tblComplete = document.getElementById('tbl-complete');
+  let btnActivityMenu = document.getElementById('btn-activity-menu');
+  let activityMenu = document.getElementById('menu-activities-category');
+  btnActivityMenu.addEventListener('click', function(){
+    activityMenu.classList.toggle('hide');
+  });
   let typeIdx = window.sessionStorage.getItem('typeIndex') || '0';
   clientRoutes.getData('current?typeIndex=' + typeIdx, function(err, data){
     if(err){
@@ -22,7 +27,7 @@ module.exports = function current(){
       console.error(err);
       return;
     }
-    buildMenu(data.json[0].activityCategories, document.getElementById('menu-activities-category'));
+    buildMenu(data.json[0].activityCategories, activityMenu);
   });
 };
 //expects tbl to be a tbody element
