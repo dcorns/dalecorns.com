@@ -13,7 +13,7 @@ import * as express from "express";
 let corngoose = require ("corngoose");
 let app = express();
 let server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-let server_port = process.env.HTTP_PORT || 3000;
+let server_port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 let server;
 let path = require('path');
 //Serve static assets from public
