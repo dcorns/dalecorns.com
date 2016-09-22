@@ -8,7 +8,8 @@ var clientRoutes = require('../clientRoutes')();
 module.exports = function current(){
   var tblActivity = document.getElementById('tbl-activity');
   var tblComplete = document.getElementById('tbl-complete');
-  clientRoutes.getData('current', function(err, data){
+  let typeIdx = window.sessionStorage.getItem('typeIndex') || '0';
+  clientRoutes.getData('current?typeIndex=' + typeIdx, function(err, data){
     if(err){
       alert('No current data stored locally. Internet connection required');
       console.error(err);
@@ -24,7 +25,7 @@ module.exports = function current(){
     buildMenu(data.json[0].activityCategories, document.getElementById('menu-activities-category'));
   });
 };
-
+//expects tbl to be a tbody element
 function appendActivity(aObj, tbl, isComplete){
   var row = document.createElement('tr');
   var startDate = document.createElement('td');
@@ -55,7 +56,7 @@ function appendActivity(aObj, tbl, isComplete){
   }
   tbl.appendChild(row);
 }
-
+//expects tblNow and tblOld to be tbody elements
 function buildActivityTable(data, tblNow, tblOld){
   //Sort by start date using custom sort compare function
   data = data.json;
@@ -105,7 +106,22 @@ function buildMenu(data, menuElement){
     let btn = document.createElement('button');
     btn.textContent = item;
     btn.value = menuCount;
-    console.dir(btn.value);
+    btn.addEventListener('click', function(){
+      var tblActivity = document.getElementById('tbl-activity');
+      var tblComplete = document.getElementById('tbl-complete');
+      tblActivity.innerHTML = '';
+      tblComplete.innerHTML = '';
+      window.sessionStorage.setItem('typeIndex', this.value);
+      clientRoutes.getData('current?typeIndex=' + this.value, function(err, data){
+        if(err){
+          alert('No current data stored locally. Internet connection required');
+          console.error(err);
+          return;
+        }
+        buildActivityTable(data, tblActivity, tblComplete);
+      });
+    });
+    menuElement.appendChild(btn);
     menuCount++;
   });
 }

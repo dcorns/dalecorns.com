@@ -26,7 +26,7 @@ checkForToken();
 
 var header = document.getElementById('top');
 //default view
-route('#/current');
+//route('#/current');
 
 header.addEventListener('mouseover', function(){
   slideShow.play(3000);

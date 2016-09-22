@@ -17,11 +17,22 @@ module.exports = function(app){
   });
 
   app.get('/current', function (req, res, next){
-    corngoose.getCollection('currentActivities', function(err, data){
-      res.status(200);
-      res.contentType = 'json';
-      res.send(data);
-    });
+    if(req.query.hasOwnProperty('typeIndex')){
+      corngoose.dbDocFind({type: parseInt(req.query['typeIndex'], 10)}, 'currentActivities', function(err, data){
+        if(err) console.dir(err);
+        res.status(200);
+        res.contentType = 'json';
+        res.send(data);
+      });
+    }
+    else{
+      corngoose.getCollection('currentActivities', function(err, data){
+        res.status(200);
+        res.contentType = 'json';
+        res.send(data);
+      });
+    }
+
   });
 
   app.get('/skills', function (req, res, next){
@@ -227,7 +238,6 @@ module.exports = function(app){
   });
 
   app.post('/saveProfile', function(req, res, next){
-    console.dir(req.params);
     dataScript.saveProfile(req.header('Authorization'), req.params, function(err, data){
       if(err) playErr(res, err);
       else{

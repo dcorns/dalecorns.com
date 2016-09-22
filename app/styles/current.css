@@ -46,3 +46,9 @@
     border-radius: 50%;
     text-align: center;
 }
+#current button:hover{
+    background-color: cyan;
+}
+#current button:active{
+    background-color: #ddffa3;
+}
