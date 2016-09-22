@@ -55,3 +55,5 @@ For development gulp and grunt is used. Gulp is used to call grunt indirectly.
 Running `gulp watcher` will insure that all the css is converted from 4 to 3 and combined into one file, insure that the all the Java Script is converted from ES6 to 5 and combined into one file, insures that all the html views are converted to JavaScript, and keeps Development/index.html in up to date with app/index.html.
 ####Deployment
 `gulp ship` transfers the contents of Development to public for git deployment to openshift `git push openshift master`
+####Useful OpenShift commands
+`rhc tail -a dalecorns` Output logs to terminal in real time. `ctl_app status` Run in ssh session to show status of gears more accurately than the OpenShift console. `ctl_all start` Start application and dependencies.
