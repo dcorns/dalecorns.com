@@ -10,6 +10,7 @@ var corngoose   = require('corngoose'),
   dataScript = require('./dataScript');
 var secret = process.env.DRCAUTH;
 
+}
 module.exports = function(app){
   app.get('/status', function (req, res, next)
   {
@@ -17,6 +18,7 @@ module.exports = function(app){
   });
 
   app.get('/current', function (req, res, next){
+
     if(req.query.hasOwnProperty('typeIndex')){
       corngoose.dbDocFind({type: parseInt(req.query['typeIndex'], 10)}, 'currentActivities', function(err, data){
         if(err) console.dir(err);

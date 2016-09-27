@@ -1,4 +1,6 @@
 /*.js
 *.js.map
+app/js/viewScripts/current.js
+api/**/*.js
 Development/
 build/

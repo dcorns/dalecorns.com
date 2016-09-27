@@ -130,3 +130,32 @@ function buildMenu(data, menuElement){
     menuCount++;
   });
 }
+
+class Activity{
+  startDate: string;
+  endDate: string;
+  activity: string;
+  link: string;
+  category: number;
+  details: string;
+  constructor(startDate: string, endDate?: string, activity:string, link?: string, category: number, details?:string){
+    this.startDate = startDate;
+    this.endDate = endDate || '';
+    this.activity = activity;
+    this.link = link || '';
+    this.category = category;
+  }
+}
+
+function getActivityData(typeIdx: number, closed: boolean, startDate: string, endDate: string): Activity[]{
+  let result = Array<Activity>;
+  clientRoutes.getData(`current?typeIndex=${{typeIdx}}&startDate=${{startDate}}&status=${{closed}}&endDate=${{endDate}}`, function(err, data){
+    if(err){
+      alert('No current data stored locally. Internet connection required');
+      console.error(err);
+      return;
+    }
+    result=data;
+  });
+  return result;
+}

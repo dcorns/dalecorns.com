@@ -13,7 +13,7 @@ Get the git url: `rhc show-app` ' APP_NAME<br/>
 Add the marker file `hot_deploy` to skip server restart on deployment: `touch .openshift/markers/hot_deploy`<br/>
 Now you can update using `git push openshift master`
 ####Connect to openshift mongo database from shell
-`rhc port-forward` APP_NAME
+`rhc port-forward -a` APP_NAME
 ####Connect to openshift using shell
 `rhc ssh -a` APP_NAME
 ###Alternate Firebase Setup
