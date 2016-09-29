@@ -4,7 +4,7 @@
  * Copyright © 2016 Dale Corns
  */
 'use strict';
-
+//d
 var corngoose   = require('corngoose'),
   auth = require('cornorize'),
   dataScript = require('./dataScript');
