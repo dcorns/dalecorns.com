@@ -3,12 +3,13 @@
  * Created by dcorns on 7/7/16
  * Copyright © 2016 Dale Corns
  */
+///<reference path='../all.d.ts' />
 'use strict';
-//d
 var corngoose   = require('corngoose'),
   auth = require('cornorize'),
   dataScript = require('./dataScript');
 var secret = process.env.DRCAUTH;
+import {ActivityData} from './drcData';
 
 module.exports = function(app){
   app.get('/status', function (req, res, next)
@@ -17,7 +18,9 @@ module.exports = function(app){
   });
 
   app.get('/current', function (req, res, next){
+    let activity = new ActivityData();
     if(req.query.hasOwnProperty('typeIndex')){
+      activity.type = parseInt(req.query['typeIndex'], 10);
       corngoose.dbDocFind({type: parseInt(req.query['typeIndex'], 10)}, 'currentActivities', function(err, data){
         if(err) console.dir(err);
         res.status(200);
