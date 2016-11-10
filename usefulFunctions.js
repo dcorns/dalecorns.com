@@ -3,6 +3,7 @@
  * Created by dcorns on 6/10/16
  * Copyright © 2016 Dale Corns
  */
+///<reference path='all.d.ts' />
 'use strict';
 module.exports = (function usefulFunctions() {
     return {

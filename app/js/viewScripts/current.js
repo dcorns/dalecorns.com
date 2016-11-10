@@ -20,7 +20,7 @@ module.exports = function current(){
       console.error(err);
       return;
     }
-    buildActivityTable(data, tblActivity, tblComplete);
+    buildActivityTable(data.json, tblActivity, tblComplete);
   });
   clientRoutes.getData('currentCategoryMenu', function(err, data){
     if(err){
@@ -57,52 +57,53 @@ function appendActivity(aObj, tbl, isComplete){
     row.appendChild(endDate);
   }
   if(aObj['details']){
-    addDetails(row, aObj.details);
+    addDetails(row, aObj.details, 'activity-detail');
   }
   tbl.appendChild(row);
 }
-//expects tblNow and tblOld to be tbody elements
+/**
+ * @function buildActivityTable
+ * Builds the completed and incomplete activity tables
+ * Depends on the splitAndIndexData and appendActivity functions
+ * @param data
+ * @param tblNow
+ * @param tblOld
+ */
 function buildActivityTable(data, tblNow, tblOld){
-  //Sort by start date using custom sort compare function
-  data = data.json;
-  data.sort(function(a, b){
+  let splitData = splitAndIndexData(data);
+  splitData.incomplete.sort(function(a, b){
     return new Date(b.startDate) - new Date(a.startDate);
   });
-  var len = data.length;
-  var c = 0;
+  splitData.complete.sort(function(a, b){
+    return new Date(b.endDate) - new Date(a.endDate);
+  });
+  var len = splitData.incomplete.length, c = 0;
   for(c; c < len; c++){
-    if(!(data[c].endDate)){
-      appendActivity(data[c], tblNow, false);
-    }
-    else{
-      appendActivity(data[c], tblOld, true);
-    }
+    appendActivity(splitData.incomplete[c], tblNow, false);
+  }
+  len = splitData.complete.length; c = 0;
+  for(c; c < len; c++){
+    appendActivity(splitData.complete[c], tblOld, true);
   }
 }
-//addDetails
-//Uses the activity-detail element from current.html and the hide class from layout.css
-//Receives a tr element and activity details text
-//prepends a button to click for details on the first td of the tr and adds an event listener to display or hide the details below the row when the button is clicked.
-function addDetails(rowIn, details){
+/**
+ * @function addDetails
+ * Prepends a button to click for details on the first td of the rowIn. Adds a data-details attribute to rowIn and sets its value to details. Adds an event listener to set the innerHTML of the element with the id of viewContainer to data-details and toggle display of viewContainer below the row when the button is clicked. Depends on tableInsertView
+ * @param rowIn tr
+ * @param details String
+ * @param viewContainer
+ */
+function addDetails(rowIn, details, viewContainer){
   let btn = document.createElement('button');
   btn.textContent = '*';
   rowIn.setAttribute('data-details', details);
-
   btn.addEventListener('click', function(){
-    let detailSection = document.getElementById('activity-detail');
-    detailSection.classList.toggle('hide');
-    if(!(detailSection.classList.contains('hide'))){
-      let row = this.parentNode.parentNode;
-      let rect = row.getBoundingClientRect();
-      detailSection.style.left = `${rect.left + scrollX}px`;
-      detailSection.style.top = `${rect.top + rect.height + scrollY}px`;
-      detailSection.style.width = `${rect.width}px`;
-      detailSection.innerHTML=row.getAttribute('data-details');
-      //detailSection.scrollIntoView();
-    }
+    let detailSection = document.getElementById(viewContainer);
+    let row = this.parentNode.parentNode;
+    detailSection.innerHTML = row.getAttribute('data-details');
+    tableInsertView(detailSection, row);
   });
   rowIn.childNodes[0].insertBefore(btn, rowIn.childNodes[0].childNodes[0]);
-  //rowIn.childNodes[0].innerHTML = btn.outerHTML + rowIn.childNodes[0].innerHTML;
 }
 
 function buildMenu(data, menuElement){
@@ -129,4 +130,34 @@ function buildMenu(data, menuElement){
     menuElement.appendChild(btn);
     menuCount++;
   });
+}
+/**
+ * @function tableInsertView
+ * Take in a DOM nade view and a DOM node tr. Toggle insert or remove view after the tr.
+ * Depends on layout css hide class and that the viewIn nade be assigned absolute positioning
+ * @param viewIn
+ * @param insertRow
+ */
+function tableInsertView(viewIn, insertRow){
+  viewIn.classList.toggle('hide');
+  if(!(viewIn.classList.contains('hide'))) {
+    let rect = insertRow.getBoundingClientRect();
+    viewIn.style.left = `${rect.left + scrollX}px`;
+    viewIn.style.top = `${rect.top + rect.height + scrollY}px`;
+    viewIn.style.width = `${rect.width}px`;
+  }
+}
+/**
+ * @function splitAndIndexData
+ * Separates data by data[i].endDate and add its index within the array to it.
+ * @param data
+ * @returns {{incomplete: Array, complete: Array}}
+ */
+function splitAndIndexData(data){
+  let i = 0, len = data.length, noEndDate = [], hasEndDate = [];
+  for(i; i < len; i++){
+    data[i].idx = i;
+    data[i].endDate ? hasEndDate.push(data[i]) : noEndDate.push(data[i]);
+  }
+  return {incomplete: noEndDate, complete: hasEndDate};
 }

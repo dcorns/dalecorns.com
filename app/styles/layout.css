@@ -40,6 +40,9 @@
     .hide {
         display: none;
     }
+    .absolute{
+        position: absolute;
+    }
     .show{
         display: inline-block;
         width: 8%;
@@ -63,9 +66,6 @@
     }
     .basic-info aside{
         font-size: .5rem;
-    }
-    .hide{
-        display: none;
     }
     .icon {
         max-width: 100%;
