@@ -21,7 +21,7 @@ module.exports = function(app){
     let activity = new ActivityData();
     if(req.query.hasOwnProperty('typeIndex')){
       activity.type = parseInt(req.query['typeIndex'], 10);
-      corngoose.dbDocFind({type: parseInt(req.query['typeIndex'], 10)}, 'currentActivities', function(err, data){
+      corngoose.dbDocFind({type: activity.type, 'currentActivities', function(err, data){
         if(err) console.dir(err);
         res.status(200);
         res.contentType = 'json';
