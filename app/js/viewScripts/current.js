@@ -124,7 +124,7 @@ function buildMenu(data, menuElement){
           console.error(err);
           return;
         }
-        buildActivityTable(data, tblActivity, tblComplete);
+        buildActivityTable(data.json, tblActivity, tblComplete);
       });
     });
     menuElement.appendChild(btn);
