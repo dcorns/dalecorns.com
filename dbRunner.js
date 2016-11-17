@@ -3,18 +3,15 @@
  */
 ///<reference path='all.d.ts' />
 'use strict';
-var proc = require('child_process');
-var DbRunner = (function () {
-    function DbRunner() {
-    }
-    DbRunner.prototype.startDb = function (dbType, cb) {
-        var _this = this;
+let proc = require('child_process');
+class DbRunner {
+    startDb(dbType, cb) {
         switch (dbType) {
             case 'mongo':
-                checkForRunningDb('mongo', function (err, data) {
+                checkForRunningDb('mongo', (err, data) => {
                     if (err) {
-                        _this.dbProc = proc.exec('mongod');
-                        cb(null, _this.dbProc.pid + ' (started by host)');
+                        this.dbProc = proc.exec('mongod');
+                        cb(null, this.dbProc.pid + ' (started by host)');
                     }
                     else {
                         cb(null, data);
@@ -24,9 +21,8 @@ var DbRunner = (function () {
             default:
                 break;
         }
-    };
-    return DbRunner;
-}());
+    }
+}
 function checkForRunningDb(dbType, cb) {
     switch (dbType) {
         case 'mongo':
@@ -44,6 +40,6 @@ function checkForRunningDb(dbType, cb) {
             break;
     }
 }
-var db = new DbRunner();
+let db = new DbRunner();
 module.exports = db;
 //# sourceMappingURL=dbRunner.js.map

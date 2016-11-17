@@ -1,7 +1,8 @@
 /**
- * dataScripts
  * Created by dcorns on 7/7/16
  * Copyright © 2016 Dale Corns
+ * @module dataScripts
+ * For Mongo database operations
  */
 ///<reference path='../all.d.ts' />
 'use strict';

@@ -55,5 +55,29 @@ For development gulp and grunt is used. Gulp is used to call grunt indirectly.
 Running `gulp watcher` will insure that all the css is converted from 4 to 3 and combined into one file, insure that the all the Java Script is converted from ES6 to 5 and combined into one file, insures that all the html views are converted to JavaScript, and keeps Development/index.html in up to date with app/index.html.
 ####Deployment
 `gulp ship` transfers the contents of Development to public for git deployment to openshift `git push openshift master`
-####Useful OpenShift commands
+#####Useful OpenShift commands
 `rhc tail -a dalecorns` Output logs to terminal in real time. `ctl_app status` Run in ssh session to show status of gears more accurately than the OpenShift console. `ctl_all start` Start application and dependencies.
+#####AWS Deployment
+######Create new VPC for a separate public ip
+######Launch a new instance of RedHat enterprise linux on new VPC
+######Add security rules for HTTP, HTTPS, and SSH traffic
+######Create or choose SSH key
+######Connect to new instance via SSH or the AWS CLI
+Get the instance ID from the EC2 console or with describe-instances using the CLI<br/>
+Get the public DNS from the EC2 console or using describe-instances using the CLI<br/>
+Locate the the pem file that was downloaded when the SSH key was created or chosen<br/>
+AWS instructs us to connect like this:
+`ssh -i /path/my-key-pair.pem ec2-user@ec2-198-51-100-1.compute-1.amazonaws.com`<br/>
+It does not work.<br/>
+Do this instead:<br/>
+Connecting to EC2 instance:
+Connect using Putty, or PuTTY. It is an SSH and telnet client that can be used to connect to your remote Linux instances. Make sure you have the tool called PuttyGen to create your private key (*.ppk).<br/>
+Run this command: `puttygen <theAWS.pemFile> -o <nameForPuttyKey>.ppk`<br/>
+Open putty and put the ec2 domain name or ip address provided on the instance dashboard into the appropriate field.<br/>
+Navigate to connection>SSH>Auth in the category tree and and highlight it.<br/>
+Browse for the key created above and verify it is trusted when the prompted.<br/>
+Go back to the session part of the tree, give the session a name and save it for future use.<br/>
+Click open. Login as ec2-user.<br/>
+Click the x to close.<br/>
+######Install supporting software
+`sudo yum install git`
