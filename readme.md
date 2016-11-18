@@ -81,3 +81,5 @@ Click open. Login as ec2-user.<br/>
 Click the x to close.<br/>
 ######Install supporting software
 `sudo yum install git`
+Install node with 'n' version control: This command will set both PREFIX and N_PREFIX to $HOME/n, installs n to $HOME/n/bin, modifies the initialization files of supported shells to export N_PREFIX and add $HOME/n/bin to the PATH, and installs the latest stable node version. `curl -L http://git.io/n-install | bash`</br>
+Update npm to latest version `npm install -g npm`<br/>
