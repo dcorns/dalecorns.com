@@ -82,4 +82,25 @@ Click the x to close.<br/>
 ######Install supporting software
 `sudo yum install git`
 Install node with 'n' version control: This command will set both PREFIX and N_PREFIX to $HOME/n, installs n to $HOME/n/bin, modifies the initialization files of supported shells to export N_PREFIX and add $HOME/n/bin to the PATH, and installs the latest stable node version. `curl -L http://git.io/n-install | bash`</br>
+Both n itself and all node versions it manages are hosted inside a single, optionally configurable directory, which can later be removed with the included n-uninstall script.<br/>
+n-update updates n itself to the latest version. See the n-install repo for more details.<br/>
 Update npm to latest version `npm install -g npm`<br/>
+Install mongodb community edition:<br/>
+Create a file called /etc/yum.repos.d/mongodb-org-3.2.repo and add the following lines using vim(vi)
+```[mongodb-org-3.2]
+   name=MongoDB Repository
+   baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.2/x86_64/
+   gpgcheck=1
+   enabled=1
+   gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc
+   ```
+Then install via yum: `sudo yum install -y mongodb-org`<br/>
+If it does not exist, create a /data/db folder<br/>
+Change permissions on the /data/db folder `chmod 0755 /data/db`<br/>
+Change ownership of the /data/db folder `sudo chown -R ec2-user:ec2-user /data/db`<br/>
+Test mongodb and mongo client:
+```
+   mongod &
+   mongo //exit using CTRL-D
+   mongod --shutdown
+   ```
