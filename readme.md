@@ -101,11 +101,10 @@ Test mongodb and mongo client:
    mongo //exit using CTRL-D
    mongod --shutdown
    ```
-Setup port forwarding:<br/>
-Edit /etc/sysctl.conf to enable port forwarding: `sudo vi /etc/sysctl.conf`<br/>
-Change net.ipv4.ip_forward=0 to net.ipv4.ip_forward=1<br/>
-Enable changes to sysctl.conf: `sudo sysctl -p /etc/sysctl.conf`<br/>
-Now `cat /proc/sys/net/ipv4/ip_forward` should return 1<br/>
+######Setup port forwarding:
 Forward port 80 to 3000: `sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000`</br>
-Forward port 443 to 3000: `sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 3000`</br>
+Forward port 443 to 3000: `sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 3000`<br/>
+Save settings: `sudo service iptables save`<br/>
+######Important
+No amount of iptables configuring or EC2 security group configuring can fix a node application that is configured to listen on 127.0.0.1. Often this is the port used in tutorials, but it is a loop back only connection for localhost. Therefore node will never listen/open a port externally this way. MAKE SURE YOU MODIFY YOUR APPLICATION TO LISTEN ON HOST 0.0.0.0 IF IT IS CURRENTLY SET TO 127.0.0.1
 
