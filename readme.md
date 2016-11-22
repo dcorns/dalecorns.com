@@ -16,6 +16,12 @@ Now you can update using `git push openshift master`
 `rhc port-forward` APP_NAME
 ####Connect to openshift using shell
 `rhc ssh -a` APP_NAME
+####Retrieve mongo database
+Forward the mongo database connection from openshift as specified above</br>
+Use a local terminal to change to the directory to which the data will be copied</br>
+Run `mongodump`<br/>
+This will create a dump directory and store the data inside it.</br>
+Next replace the local database collections that exist in the database retrieved from the remote by starting mongod locally, and then changing to the parent of the dump directory created by mongodump. Then run `mongorestore --drop`</br>
 ###Alternate Firebase Setup
 Create a firebase account and application<br/>
 Go to application settings, permissions, service account<br/>
@@ -57,7 +63,7 @@ Running `gulp watcher` will insure that all the css is converted from 4 to 3 and
 `gulp ship` transfers the contents of Development to public for git deployment to openshift `git push openshift master`
 #####Useful OpenShift commands
 `rhc tail -a dalecorns` Output logs to terminal in real time. `ctl_app status` Run in ssh session to show status of gears more accurately than the OpenShift console. `ctl_all start` Start application and dependencies.
-#####AWS Deployment
+###AWS Setup
 ######Create new VPC for a separate public ip
 ######Launch a new instance of Amazon Linux AMI on new VPC
 ######Add security rules for HTTP, HTTPS, and SSH traffic
@@ -106,5 +112,33 @@ Forward port 80 to 3000: `sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dp
 Forward port 443 to 3000: `sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 3000`<br/>
 Save settings: `sudo service iptables save`<br/>
 ######Important
-No amount of iptables configuring or EC2 security group configuring can fix a node application that is configured to listen on 127.0.0.1. Often this is the port used in tutorials, but it is a loop back only connection for localhost. Therefore node will never listen/open a port externally this way. MAKE SURE YOU MODIFY YOUR APPLICATION TO LISTEN ON HOST 0.0.0.0 IF IT IS CURRENTLY SET TO 127.0.0.1
+No amount of iptables configuring or EC2 security group configuring can fix a node application that is configured to listen on 127.0.0.1. Often this is the port used in tutorials, but it is a loop back only connection for localhost. Therefore node will never listen/open a port externally this way. MAKE SURE YOU MODIFY YOUR APPLICATION TO LISTEN ON HOST 0.0.0.0 IF IT IS CURRENTLY SET TO 127.0.0.1<br/>
+######Transfering files via scp
+The following will transfer the specified file into the ec2-user home directory</br>
+scp -i <path to pem file> <path to file> ec2-user@<public domain name>:~</br>
+######Persist the application beyond ssh session
+A quick and dirty way to do this:</br>
+Run the screen command before starting the application. When you exit the ssh, the node process will keep running. To access it with a new ssh, after logging on run `screen -r`. This will put you right back where you left off.<br/>
+A better way:</br>
+Install nodemon `npm install -g nodemon`. By using nodemon to start the application, the application will restart automatically if it crashes and if any of the files change. Screen will still be used for persistence, but we also give the screen a unique name by which to refer to it. Sometimes nodemon will have issues as with this site. If that is the case, simply use node in all the places where nodemon is referenced below.
+```
+screen -S myapp
+nodemon appname
+```
+Now when we ssh back in we use the command `screen -r myapp` to bring the session back up. Note that if myapp is the only screen running, then you will still need to recall it without the name ie `screen -r`<br/>
+Now let's make the all of this run when the instance is started.<br/>
+First we make an executable shell script containing the commands:<br/>
+```
+touch ~/startApp.sh
+chmod u+x ~/startApp.sh
+```
+Add the following commands to the file (you can do this using the vi command to load vim):
+```
+#!/bin/bash >> ~/startApp.sh
+cd /home/ec2-user/<application directory> >> ~/startApp.sh
+nodemon <application name>
+```
+Now that we have a script to load the application, we will call it using screen when the instance starts or is restarted. Add the following line to /etc/rc.local. If the file does not exist create in and give it 755 permissions.<br/>
+`su - ec2-user -c 'screen -d -m -S <chosen name for screen> /home/ec2-user/startApp.sh`<br/>
+Remember that in order to shutdown the application you will need to use `screen -r` or `screen -r <chosen name for screen>` in order to access the screen that the application is running under.
 
