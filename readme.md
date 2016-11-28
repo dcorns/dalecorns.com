@@ -142,5 +142,9 @@ Now that we have a script to load the application, we will call it using screen 
 `su - ec2-user -c 'screen -d -m -S <chosen name for screen> /home/ec2-user/startApp.sh`<br/>
 Remember that in order to shutdown the application you will need to use `screen -r` or `screen -r <chosen name for screen>` in order to access the screen that the application is running under.
 #####Development Flow
-minimize bundle.js
-Copy host and server js files and public directory to AWS (replace existing files) Copy api/*.*/*.js to AWS Copy dbRunner.js to AWS Copy production package.json
+The following gulp tasks are used for deployment:<br/>
+ship-client: copies files from Development folder to dalecorns.com/public<br>
+ship-api: copies api/*.js to dalecorns.com/api<br>
+ship-files: copies host.js, server.js, package.json, and dbRunner.js to dalecorns.com/</br>
+upload-to-AWS: runs the shipit.sh script that copies dalecorns.com to AWS</br>
+ship: Runs all of the tasks above. (run-sequence.js is used to synchronise the tasks)
