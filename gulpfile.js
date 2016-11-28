@@ -16,6 +16,8 @@ var cssnext = require('postcss-cssnext');
 var cssnano = require('cssnano');
 var gulpWebpack = require('webpack-stream');
 var webpack = require('webpack');
+//added to run shipping tasks synchronously
+var runSequence = require('run-sequence');
 gulp.task('grunt', function () {
     childProcess('grunt');
 });
@@ -55,9 +57,26 @@ gulp.task('watcher', function () {
     gulp.watch('app/styles/**/*', ['build-css']);
     gulp.watch('app/views/**/*', ['grunt', 'webpack']);
 });
-gulp.task('ship', function () {
+gulp.task('ship-client', function () {
     gulp.src(['Development/**/*'])
-        .pipe(gulp.dest('public'));
+        .pipe(gulp.dest('dalecorns.com/public'));
+});
+gulp.task('ship-api', function () {
+    gulp.src(['api/**/*.js'])
+        .pipe(gulp.dest('dalecorns.com/api'));
+});
+gulp.task('ship-files', function () {
+    gulp.src(['server.js', 'host.js', 'dbRunner.js', 'package.json'])
+        .pipe(gulp.dest('dalecorns.com'));
+});
+gulp.task('upload-to-AWS', function () {
+    const upload = childProcess('bash', ['shipit.sh', 'dalecorns.com']);
+    upload.stdout.on('data', function (data) {
+        console.log(data.toString('utf8'));
+    });
+});
+gulp.task('ship', function () {
+    runSequence(['ship-client', 'ship-api', 'ship-files'], 'upload-to-AWS');
 });
 gulp.task('default', ['watcher', 'dev-server']);
 //# sourceMappingURL=gulpfile.js.map

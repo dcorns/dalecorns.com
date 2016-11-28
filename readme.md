@@ -134,11 +134,13 @@ chmod u+x ~/startApp.sh
 ```
 Add the following commands to the file (you can do this using the vi command to load vim):
 ```
-#!/bin/bash >> ~/startApp.sh
-cd /home/ec2-user/<application directory> >> ~/startApp.sh
+#!/bin/bash
+cd /home/ec2-user/<application directory>
 nodemon <application name>
 ```
 Now that we have a script to load the application, we will call it using screen when the instance starts or is restarted. Add the following line to /etc/rc.local. If the file does not exist create in and give it 755 permissions.<br/>
 `su - ec2-user -c 'screen -d -m -S <chosen name for screen> /home/ec2-user/startApp.sh`<br/>
 Remember that in order to shutdown the application you will need to use `screen -r` or `screen -r <chosen name for screen>` in order to access the screen that the application is running under.
-
+#####Development Flow
+minimize bundle.js
+Copy host and server js files and public directory to AWS (replace existing files) Copy api/*.*/*.js to AWS Copy dbRunner.js to AWS Copy production package.json
