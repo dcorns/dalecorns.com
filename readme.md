@@ -114,8 +114,9 @@ Save settings: `sudo service iptables save`<br/>
 ######Important
 No amount of iptables configuring or EC2 security group configuring can fix a node application that is configured to listen on 127.0.0.1. Often this is the port used in tutorials, but it is a loop back only connection for localhost. Therefore node will never listen/open a port externally this way. MAKE SURE YOU MODIFY YOUR APPLICATION TO LISTEN ON HOST 0.0.0.0 IF IT IS CURRENTLY SET TO 127.0.0.1<br/>
 ######Transfering files via scp
+`chmod 400 pathToPemFile/pemFileName`
 The following will transfer the specified file into the ec2-user home directory</br>
-`scp -i <path to pem file> <path to file> ec2-user@<public domain name>:~`</br>
+`scp -i <path to pem file> <path to file/s> ec2-user@<public domain name>:~`</br>
 ######Persist the application beyond ssh session
 A quick and dirty way to do this:</br>
 Run the screen command before starting the application. When you exit the ssh, the node process will keep running. To access it with a new ssh, after logging on run `screen -r`. This will put you right back where you left off.<br/>
