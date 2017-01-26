@@ -2,5 +2,4 @@
 *.js.map
 #api/**/*.js
 Development/
-build/
-dalecorns.com/
+app/build/
