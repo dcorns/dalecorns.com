@@ -52,3 +52,9 @@
 #current button:active{
     background-color: #ddffa3;
 }
+table{
+    margin-bottom: 5%;
+}
+#date-range{
+    width: 80%;
+}

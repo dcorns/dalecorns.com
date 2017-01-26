@@ -15,13 +15,14 @@ var pages = require('./build/views');
 mySkills.help = require('./helperMethods');
 var pageScripts = require('./pageScripts');
 var route = require('./viewRouter')(pages, pageScripts, mySkills);//(view, controller, app)
-
+mySkills.route = route;
+mySkills.clientRoutes = require('./clientRoutes');
+window.mySkills = mySkills;
 slideShow.loadImages(slides);
 slideShow.swap();
 slideShow.play(10000);
 //load shared and dom objects
 mySkills.sharedObjects.init();
-
 checkForToken();
 
 var header = document.getElementById('top');

@@ -29,6 +29,7 @@ module.exports = function current(){
     }
     buildMenu(data.json[0].activityCategories, activityMenu);
   });
+  mySkills.route('daterange', 'date-range');
 };
 //expects tbl to be a tbody element
 function appendActivity(aObj, tbl, isComplete){
