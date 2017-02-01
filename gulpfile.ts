@@ -52,7 +52,7 @@ gulp.task('build-css', function(){
 });
 
 gulp.task('watcher', function(){
-  gulp.watch('app/js/**/*', ['webpack']);
+  //gulp.watch('app/js/**/*', ['webpack']);
   //Keep Development build folder assets in sync
   gulp.watch('app/assets/**/*',['copyassets']);
   gulp.watch('app/index.html', function(){

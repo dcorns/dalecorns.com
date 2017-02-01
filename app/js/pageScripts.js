@@ -7,10 +7,11 @@
 'use strict';
 
 module.exports = {
-    skills: require('./viewScripts/skills'),
+    //skills: require('./viewScripts/skills'),
     current: require('./viewScripts/current'),
-    login: require('./viewScripts/login'),
-    register: require('./viewScripts/register'),
-    logout: require('./viewScripts/logout'),
-    myProfile: require('./viewScripts/myProfile')
+    //login: require('./viewScripts/login'),
+    //register: require('./viewScripts/register'),
+    //logout: require('./viewScripts/logout'),
+    myProfile: require('./viewScripts/myProfile'),
+    daterange: require('./viewScripts/daterange')
   };
