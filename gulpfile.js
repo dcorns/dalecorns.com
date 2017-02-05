@@ -22,7 +22,7 @@ gulp.task('grunt', function () {
     childProcess('grunt');
 });
 gulp.task('webpack', function () {
-    return gulp.src('app/js/**/*.js')
+    return gulp.src('app/js/index.js')
         .pipe(gulpWebpack({
         output: {
             filename: 'bundle.js'
@@ -35,7 +35,7 @@ gulp.task('copyassets', function () {
         .pipe(gulp.dest('Development'));
 });
 gulp.task('dev-server', function () {
-    var cp = childProcess('node', ['host', '/Development']);
+    const cp = childProcess('node', ['host', '/Development']);
     cp.stdout.on('data', function (data) {
         console.log(data.toString('utf8'));
     });
@@ -47,7 +47,7 @@ gulp.task('build-css', function () {
         .pipe(gulp.dest('Development/css'));
 });
 gulp.task('watcher', function () {
-    //gulp.watch('app/js/**/*', ['webpack']);
+    gulp.watch('./**/*.ts', ['webpack']);
     //Keep Development build folder assets in sync
     gulp.watch('app/assets/**/*', ['copyassets']);
     gulp.watch('app/index.html', function () {
@@ -70,7 +70,7 @@ gulp.task('ship-files', function () {
         .pipe(gulp.dest('dalecorns.com'));
 });
 gulp.task('upload-to-AWS', function () {
-    var upload = childProcess('bash', ['shipit.sh', 'dalecorns.com']);
+    const upload = childProcess('bash', ['shipit.sh', 'dalecorns.com']);
     upload.stdout.on('data', function (data) {
         console.log(data.toString('utf8'));
     });

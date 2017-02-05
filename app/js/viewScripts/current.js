@@ -15,8 +15,21 @@ module.exports = function current(){
     activityMenu.classList.toggle('hide');
   });
   let typeIdx = window.sessionStorage.getItem('typeIndex') || '0';
+  //Put the daterange component inside of date-range
   mySkills.route('daterange', 'date-range');
-  clientRoutes.getData('current?typeIndex=' + typeIdx, function(err, data){
+  dateRange.addEventListener('dateRangeChange', (e) => {
+    let sdate = e.target.dataset.startDate;
+    let edate = e.target.dataset.endDate;
+    clientRoutes.getData(`current?typeIndex=${typeIdx}?startDate=${sdate}?endDate=${edate}`, function(err, data){
+      if(err){
+        alert('No current data stored locally. Internet connection required');
+        console.error(err);
+        return;
+      }
+      buildActivityTable(data.json, tblActivity, tblComplete);
+    });
+  });
+  clientRoutes.getData(`current?typeIndex=${typeIdx}`, function(err, data){
     if(err){
       alert('No current data stored locally. Internet connection required');
       console.error(err);
@@ -137,7 +150,7 @@ function buildMenu(data, menuElement){
 /**
  * @function tableInsertView
  * Take in a DOM nade view and a DOM node tr. Toggle insert or remove view after the tr.
- * Depends on layout css hide class and that the viewIn nade be assigned absolute positioning
+ * Depends on layout css hide class and that the viewIn nade be assign absolute positioning
  * @param viewIn
  * @param insertRow
  */
@@ -170,4 +183,21 @@ function setDateRange(data, el){
   let dateRangeChangeEvt = document.createEvent('Events');
   dateRangeChangeEvt.initEvent('daterangeupdated', true, false);
   el.dispatchEvent(dateRangeChangeEvt);
+}
+function getTableData(typeIdx, dateRange){
+  let route = `current?typeIndex=${typeIdx}`;
+  if (dateRange) {
+    route = `${route}?startDate=${dateRange.start}?endDate=${dateRange.end}`
+  }
+}
+function getRangeData(){
+  clientRoutes.getData(`current?typeIndex=${typeIdx}`, function(err, data){
+    if(err){
+      alert('No current data stored locally. Internet connection required');
+      console.error(err);
+      return;
+    }
+    buildActivityTable(data.json, tblActivity, tblComplete);
+    setDateRange(data.json, dateRange);
+  });
 }

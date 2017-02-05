@@ -7,7 +7,7 @@
 'use strict';
 var corngoose = require('corngoose'), auth = require('cornorize'), dataScript = require('./dataScript');
 var secret = process.env.DRCAUTH;
-const drcData_1 = require('./drcData');
+const drcData_1 = require("./drcData");
 module.exports = function (app) {
     app.get('/status', function (req, res, next) {
         res.send("{status: 'ok'}");

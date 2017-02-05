@@ -24,7 +24,7 @@ gulp.task('grunt', function(){
 });
 
 gulp.task('webpack', function(){
-  return gulp.src('app/js/**/*.js')
+  return gulp.src('app/js/index.js')
     .pipe(gulpWebpack({
       output:{
         filename: 'bundle.js'
@@ -52,7 +52,7 @@ gulp.task('build-css', function(){
 });
 
 gulp.task('watcher', function(){
-  //gulp.watch('app/js/**/*', ['webpack']);
+  gulp.watch('./**/*.ts', ['webpack']);
   //Keep Development build folder assets in sync
   gulp.watch('app/assets/**/*',['copyassets']);
   gulp.watch('app/index.html', function(){
