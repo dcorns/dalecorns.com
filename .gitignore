@@ -3,4 +3,5 @@
 #api/**/*.js
 Development/
 app/js/build/
+api/routes.js
 app/js/viewScripts/daterange.js
