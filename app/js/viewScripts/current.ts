@@ -202,6 +202,10 @@ function getTableData(typeIdx: number, dateRange: {start: string, end: string}, 
     cb(null, data.json);
   });
 }
+/**
+ * Generic table data error handling
+ * @param err
+ */
 function playTableDataError(err){
   alert('No current data stored locally. Internet connection required');
   console.error(err);
