@@ -7,19 +7,22 @@
  */
 'use strict';
 var doAjax = require('do-ajax');
-module.exports = function clientRoutes(){
-  return{
-    getData: function(path, cb, token){
-      doAjax.ajaxGetJson('/' + path, function(err, data){
-        if(err){
-          if(!(window.localStorage.getItem(path))) cb(err, null);
-          else cb(null, JSON.parse(window.localStorage.getItem(path)));
+module.exports = function clientRoutes() {
+    return {
+        getData: function (path, cb, token) {
+            doAjax.ajaxGetJson('/' + path, function (err, data) {
+                if (err) {
+                    if (!(window.localStorage.getItem(path)))
+                        cb(err, null);
+                    else
+                        cb(null, JSON.parse(window.localStorage.getItem(path)));
+                }
+                else {
+                    window.localStorage.setItem(path, JSON.stringify(data));
+                    cb(null, data);
+                }
+            }, token);
         }
-        else{
-          window.localStorage.setItem(path, JSON.stringify(data));
-          cb(null, data);
-        }
-      }, token);
-    }
-  };
+    };
 };
+//# sourceMappingURL=clientRoutes.js.map
