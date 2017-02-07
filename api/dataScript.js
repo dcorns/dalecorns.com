@@ -1,5 +1,5 @@
 /**
- * dataScripts
+ * dataScript
  * Created by dcorns on 7/7/16
  * Copyright © 2016 Dale Corns
  */
