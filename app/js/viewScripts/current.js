@@ -20,23 +20,21 @@ module.exports = function current() {
     dateRange.addEventListener('dateRangeChange', (e) => {
         let sdate = e.target.dataset.startDate;
         let edate = e.target.dataset.endDate;
-        clientRoutes.getData(`current?typeIndex=${typeIdx}&startDate=${sdate}&endDate=${edate}`, function (err, data) {
+        getTableData(typeIdx, { start: sdate, end: edate }, (err, data) => {
             if (err) {
-                alert('No current data stored locally. Internet connection required');
-                console.error(err);
+                playTableDataError(err);
                 return;
             }
-            buildActivityTable(data.json, tblActivity, tblComplete);
+            buildActivityTable(data, tblActivity, tblComplete);
         });
     });
-    clientRoutes.getData(`current?typeIndex=${typeIdx}`, function (err, data) {
+    getTableData(typeIdx, null, (err, data) => {
         if (err) {
-            alert('No current data stored locally. Internet connection required');
-            console.error(err);
+            playTableDataError(err);
             return;
         }
-        buildActivityTable(data.json, tblActivity, tblComplete);
-        setDateRange(data.json, dateRange);
+        buildActivityTable(data, tblActivity, tblComplete);
+        setDateRange(data, dateRange);
     });
     clientRoutes.getData('currentCategoryMenu', function (err, data) {
         if (err) {
@@ -85,7 +83,6 @@ function appendActivity(aObj, tbl, isComplete) {
  * @param tblOld
  */
 function buildActivityTable(data, tblNow, tblOld) {
-    console.dir(data);
     let splitData = splitAndIndexData(data);
     splitData.incomplete.sort(function (a, b) {
         return new Date(b.startDate) - new Date(a.startDate);
@@ -93,6 +90,8 @@ function buildActivityTable(data, tblNow, tblOld) {
     splitData.complete.sort(function (a, b) {
         return new Date(b.endDate) - new Date(a.endDate);
     });
+    console.dir(splitData.incomplete);
+    console.dir(splitData.complete);
     var len = splitData.incomplete.length, c = 0;
     for (c; c < len; c++) {
         appendActivity(splitData.incomplete[c], tblNow, false);
@@ -184,21 +183,26 @@ function setDateRange(data, el) {
     dateRangeChangeEvt.initEvent('daterangeupdated', true, false);
     el.dispatchEvent(dateRangeChangeEvt);
 }
-function getTableData(typeIdx, dateRange) {
+/**
+ * Pull down table data from server
+ * @param typeIdx
+ * @param dateRange
+ * @param cb
+ */
+function getTableData(typeIdx, dateRange, cb) {
     let route = `current?typeIndex=${typeIdx}`;
     if (dateRange) {
-        route = `${route}?startDate=${dateRange.start}?endDate=${dateRange.end}`;
+        route = `${route}&startDate=${dateRange.start}&endDate=${dateRange.end}`;
     }
-}
-function getRangeData() {
-    clientRoutes.getData(`current?typeIndex=${typeIdx}`, function (err, data) {
+    clientRoutes.getData(route, function (err, data) {
         if (err) {
-            alert('No current data stored locally. Internet connection required');
-            console.error(err);
-            return;
+            cb(err, null);
         }
-        buildActivityTable(data.json, tblActivity, tblComplete);
-        setDateRange(data.json, dateRange);
+        cb(null, data.json);
     });
+}
+function playTableDataError(err) {
+    alert('No current data stored locally. Internet connection required');
+    console.error(err);
 }
 //# sourceMappingURL=current.js.map
