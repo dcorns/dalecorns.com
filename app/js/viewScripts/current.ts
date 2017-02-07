@@ -85,22 +85,10 @@ function appendActivity(aObj, tbl, isComplete){
  */
 function buildActivityTable(data, tblNow, tblOld){
   let splitData = splitAndIndexData(data);
-  splitData.incomplete.sort(function(a, b){
-    return new Date(b.startDate) - new Date(a.startDate);
-  });
-  splitData.complete.sort(function(a, b){
-    return new Date(b.endDate) - new Date(a.endDate);
-  });
-  console.dir(splitData.incomplete);
-  console.dir(splitData.complete);
-  var len = splitData.incomplete.length, c = 0;
-  for(c; c < len; c++){
-    appendActivity(splitData.incomplete[c], tblNow, false);
-  }
-  len = splitData.complete.length; c = 0;
-  for(c; c < len; c++){
-    appendActivity(splitData.complete[c], tblOld, true);
-  }
+  sortTableData(splitData.incomplete, 'startDate');
+  loadNewTableHtml(tblNow,splitData.incomplete, false);
+  sortTableData(splitData.complete, 'endDate');
+  loadNewTableHtml(tblOld, splitData.complete, true);
 }
 /**
  * @function addDetails
@@ -209,4 +197,21 @@ function getTableData(typeIdx: number, dateRange: {start: string, end: string}, 
 function playTableDataError(err){
   alert('No current data stored locally. Internet connection required');
   console.error(err);
+}
+/**
+ *
+ * @param tbl
+ * @param data
+ */
+function loadNewTableHtml(tbl: HTMLTableElement, data: [Object], includeEndDate: boolean){
+  let len= data.length, c = 0;
+  tbl.innerHTML = '';
+  for(c; c < len; c++){
+    appendActivity(data[c], tbl, includeEndDate);
+  }
+}
+function sortTableData(data: [], sortkey: string){
+  data.sort(function(a, b){
+    return new Date(b[sortkey]) - new Date(a[sortkey]);
+  });
 }
