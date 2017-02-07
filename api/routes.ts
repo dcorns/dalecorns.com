@@ -19,9 +19,9 @@ module.exports = function(app){
 
   app.get('/current', function (req, res, next){
     let activity = new ActivityData();
+    activity.type = parseInt(req.query['typeIndex'], 10);
 console.dir(req.query);
     if (req.query.hasOwnProperty('startDate')){
-      activity.type = parseInt(req.query['typeIndex'], 10);
       corngoose.dbDocFind({type: activity.type, $and:[{endDate:{$gte: req.query.startDate}}, {endDate:{$lt: req.query.endDate}}]}, 'currentActivities', (err, data) => {
         if(err) console.dir(err);
         res.status(200);
@@ -29,23 +29,15 @@ console.dir(req.query);
         res.send(data);
       });
     }
-    if(req.query.hasOwnProperty('typeIndex')){
-      activity.type = parseInt(req.query['typeIndex'], 10);
+    else{
       corngoose.dbDocFind({type: activity.type}, 'currentActivities', function(err, data){
         if(err) console.dir(err);
         res.status(200);
         res.contentType = 'json';
         res.send(data);
       });
-    }
-    else{
-      corngoose.getCollection('currentActivities', function(err, data){
-        res.status(200);
-        res.contentType = 'json';
-        res.send(data);
-      });
-    }
 
+    }
   });
 
   app.get('/skills', function (req, res, next){
