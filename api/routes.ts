@@ -5,10 +5,10 @@
  */
 ///<reference path='../all.d.ts' />
 'use strict';
-var corngoose   = require('corngoose'),
+const corngoose   = require('corngoose'),
   auth = require('cornorize'),
   dataScript = require('./dataScript');
-var secret = process.env.DRCAUTH;
+const secret = process.env.DRCAUTH;
 import {ActivityData} from './drcData';
 
 module.exports = function(app){
@@ -20,7 +20,6 @@ module.exports = function(app){
   app.get('/current', function (req, res, next){
     let activity = new ActivityData();
     activity.type = parseInt(req.query['typeIndex'], 10);
-console.dir(req.query);
     if (req.query.hasOwnProperty('startDate')){
       corngoose.dbDocFind({type: activity.type, $and:[{endDate:{$gte: req.query.startDate}}, {endDate:{$lte: req.query.endDate}}]}, 'currentActivities', (err, data) => {
         if(err) console.dir(err);
@@ -271,4 +270,8 @@ function playErr(res, err){
   res.status(500);
   res.contentType = 'json';
   res.send(err);
+}
+
+function makeLastThirtyDaysDateRange (){
+
 }
