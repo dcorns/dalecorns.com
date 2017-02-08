@@ -5,18 +5,18 @@
  */
 ///<reference path='../all.d.ts' />
 'use strict';
-var corngoose = require('corngoose'), auth = require('cornorize'), dataScript = require('./dataScript');
-var secret = process.env.DRCAUTH;
-const drcData_1 = require('./drcData');
+const corngoose = require('corngoose'), auth = require('cornorize'), dataScript = require('./dataScript');
+const secret = process.env.DRCAUTH;
+const drcData_1 = require("./drcData");
 module.exports = function (app) {
     app.get('/status', function (req, res, next) {
         res.send("{status: 'ok'}");
     });
     app.get('/current', function (req, res, next) {
         let activity = new drcData_1.ActivityData();
-        if (req.query.hasOwnProperty('typeIndex')) {
-            activity.type = parseInt(req.query['typeIndex'], 10);
-            corngoose.dbDocFind({ type: parseInt(req.query['typeIndex'], 10) }, 'currentActivities', function (err, data) {
+        activity.type = parseInt(req.query['typeIndex'], 10);
+        if (req.query.hasOwnProperty('startDate')) {
+            corngoose.dbDocFind({ type: activity.type, $and: [{ endDate: { $gte: req.query.startDate } }, { endDate: { $lte: req.query.endDate } }] }, 'currentActivities', (err, data) => {
                 if (err)
                     console.dir(err);
                 res.status(200);
@@ -25,7 +25,9 @@ module.exports = function (app) {
             });
         }
         else {
-            corngoose.getCollection('currentActivities', function (err, data) {
+            corngoose.dbDocFind({ type: activity.type }, 'currentActivities', function (err, data) {
+                if (err)
+                    console.dir(err);
                 res.status(200);
                 res.contentType = 'json';
                 res.send(data);
@@ -255,5 +257,7 @@ function playErr(res, err) {
     res.status(500);
     res.contentType = 'json';
     res.send(err);
+}
+function makeLastThirtyDaysDateRange() {
 }
 //# sourceMappingURL=routes.js.map

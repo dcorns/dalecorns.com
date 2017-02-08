@@ -8,16 +8,16 @@
  */
 /// <reference path="all.d.ts" />
 'use strict';
-var gulp = require('gulp');
-var childProcess = require('child_process').spawn;
-var postcss = require('gulp-postcss');
-var concatCss = require('gulp-concat-css');
-var cssnext = require('postcss-cssnext');
-var cssnano = require('cssnano');
-var gulpWebpack = require('webpack-stream');
-var webpack = require('webpack');
+const gulp = require('gulp');
+const childProcess = require('child_process').spawn;
+const postcss = require('gulp-postcss');
+const concatCss = require('gulp-concat-css');
+const cssnext = require('postcss-cssnext');
+const cssnano = require('cssnano');
+const gulpWebpack = require('webpack-stream');
+const webpack = require('webpack');
 //added to run shipping tasks synchronously
-var runSequence = require('run-sequence');
+const runSequence = require('run-sequence');
 gulp.task('grunt', function () {
     childProcess('grunt');
 });

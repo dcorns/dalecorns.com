@@ -6,8 +6,8 @@
  */
 ///<reference path='all.d.ts' />
 'use strict';
-const DbRunner = require('./dbRunner');
-const proc = require('child_process');
+const DbRunner = require("./dbRunner");
+const proc = require("child_process");
 const webRoot = process.argv[2] || '/public';
 DbRunner.startDb('mongo', function (err, data) {
     if (err) {
