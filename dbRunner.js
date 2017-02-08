@@ -1,20 +1,27 @@
 /**
+ * dbRunner
+ * Used check for running databases and starts them if they are not running already
  * Created by dcorns on 8/4/16.
  */
 ///<reference path='all.d.ts' />
 'use strict';
 let proc = require('child_process');
 class DbRunner {
+    /**
+     * Starts a data base if it is not already running and then executes the callback function (currently only supports mongodb dbType 'mongo')
+     * @param dbType string specifying the database type
+     * @param cb function that is returned
+     */
     startDb(dbType, cb) {
         switch (dbType) {
             case 'mongo':
                 checkForRunningDb('mongo', (err, data) => {
                     if (err) {
                         this.dbProc = proc.exec('mongod');
-                        cb(null, this.dbProc.pid + ' (started by host)');
+                        return cb(null, this.dbProc.pid + ' (started by host)');
                     }
                     else {
-                        cb(null, data);
+                        return cb(null, data);
                     }
                 });
                 break;
@@ -23,16 +30,21 @@ class DbRunner {
         }
     }
 }
+/**
+ * Uses pgrep to see if a database is already running (currently only supports mongodb dbType 'mongo')
+ * @param dbType string specifying the database type
+ * @param cb function that is returned
+ */
 function checkForRunningDb(dbType, cb) {
     switch (dbType) {
         case 'mongo':
             //Spawns a shell then executes the command within that shell, buffering any generated output.
             proc.exec('pgrep mongod', function (err, stdout) {
                 if (stdout) {
-                    cb(null, stdout);
+                    return cb(null, stdout);
                 }
                 else {
-                    cb(err, null);
+                    return cb(err, null);
                 }
             });
             break;
@@ -40,6 +52,10 @@ function checkForRunningDb(dbType, cb) {
             break;
     }
 }
+/**
+ * create instance of DbRunner
+ * @type {DbRunner}
+ */
 let db = new DbRunner();
 module.exports = db;
 //# sourceMappingURL=dbRunner.js.map

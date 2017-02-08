@@ -5,10 +5,10 @@
  * 
  */
 'use strict';
-var proc = require('child_process');
-var expect = require('chai').expect;
-var sino = require('sinon');
-var dbRunner;
+const proc = require('child_process');
+const expect = require('chai').expect;
+const sino = require('sinon');
+let dbRunner;
 
 describe('dbRunner.js', function(){
   beforeEach(function(done){
@@ -18,8 +18,8 @@ describe('dbRunner.js', function(){
     done();
   });
   it('returns the process id if mongo is already running', function(done){
-    var procStub = sino.stub(proc, 'exec').withArgs('pgrep mongod').yields(null, 456);
-    dbRunner('mongo', function(err, data){
+    let procStub = sino.stub(proc, 'exec').withArgs('pgrep mongod').yields(null, 456);
+    dbRunner.startDb('mongo', function(err, data){
       expect(data).equal(456);
       done();
     });
@@ -27,11 +27,11 @@ describe('dbRunner.js', function(){
   });
 
   it('starts the mongo database and returns process id and message if database is not already running', function(done){
-    var procStub = sino.stub(proc, 'exec');
-    var mongoCheck = procStub.withArgs('pgrep mongod').yields({}, null);
-    var mongoStart = procStub.withArgs('mongod').returns({pid: 4539});
+    let procStub = sino.stub(proc, 'exec');
+    let mongoCheck = procStub.withArgs('pgrep mongod').yields({}, null);
+    let mongoStart = procStub.withArgs('mongod').returns({pid: 4539});
     
-    dbRunner('mongo', function(err, data){
+    dbRunner.startDb('mongo', function(err, data){
       expect(err).equal(null);
       expect(procStub.calledWith('mongod'));
       expect(data).equal(4539 + ' (started by host)');
