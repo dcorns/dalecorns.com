@@ -6,9 +6,9 @@
 'use strict';
 var clientRoutes = require('../clientRoutes')();
 module.exports = function current() {
-    var tblActivity = document.getElementById('tbl-activity');
-    var tblComplete = document.getElementById('tbl-complete');
-    var dateRange = document.getElementById('date-range');
+    let tblActivity = document.getElementById('tbl-activity');
+    let tblComplete = document.getElementById('tbl-complete');
+    let dateRange = document.getElementById('date-range');
     let btnActivityMenu = document.getElementById('btn-activity-menu');
     let activityMenu = document.getElementById('menu-activities-category');
     btnActivityMenu.addEventListener('click', function () {
@@ -25,7 +25,8 @@ module.exports = function current() {
                 playTableDataError(err);
                 return;
             }
-            buildActivityTable(data, tblActivity, tblComplete);
+            sortTableData(data, 'endDate');
+            loadNewTableHtml(tblComplete, data, true);
         });
     });
     getTableData(typeIdx, null, (err, data) => {
@@ -33,8 +34,7 @@ module.exports = function current() {
             playTableDataError(err);
             return;
         }
-        buildActivityTable(data, tblActivity, tblComplete);
-        setDateRange(data, dateRange);
+        buildActivityTable(data, tblActivity, tblComplete, dateRange);
     });
     clientRoutes.getData('currentCategoryMenu', function (err, data) {
         if (err) {
@@ -46,13 +46,13 @@ module.exports = function current() {
 };
 //expects tbl to be a tbody element
 function appendActivity(aObj, tbl, isComplete) {
-    var row = document.createElement('tr');
-    var startDate = document.createElement('td');
-    var activityLink = document.createElement('td');
-    var activity = document.createElement('td');
+    let row = document.createElement('tr');
+    let startDate = document.createElement('td');
+    let activityLink = document.createElement('td');
+    let activity = document.createElement('td');
     activity.innerText = aObj.activity;
-    var endDate = isComplete ? document.createElement('td') : null;
-    startDate.innerText = new Date(aObj.startDate).toLocaleDateString();
+    let endDate = isComplete ? document.createElement('td') : null;
+    startDate.innerText = aObj.startDate;
     if (aObj.link) {
         var anchor = document.createElement('a'), anchorIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg'), anchorUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
         anchor.href = aObj.link;
@@ -66,7 +66,7 @@ function appendActivity(aObj, tbl, isComplete) {
     row.appendChild(activityLink);
     row.appendChild(startDate);
     if (endDate) {
-        endDate.innerText = new Date(aObj.endDate).toLocaleDateString();
+        endDate.innerText = aObj.endDate; // new Date(aObj.endDate).toLocaleDateString();
         row.appendChild(endDate);
     }
     if (aObj['details']) {
@@ -81,13 +81,15 @@ function appendActivity(aObj, tbl, isComplete) {
  * @param data
  * @param tblNow
  * @param tblOld
+ * @param dateRange
  */
-function buildActivityTable(data, tblNow, tblOld) {
+function buildActivityTable(data, tblNow, tblOld, dateRange) {
     let splitData = splitAndIndexData(data);
     sortTableData(splitData.incomplete, 'startDate');
     loadNewTableHtml(tblNow, splitData.incomplete, false);
     sortTableData(splitData.complete, 'endDate');
     loadNewTableHtml(tblOld, splitData.complete, true);
+    setDateRange(splitData.complete, dateRange);
 }
 /**
  * @function addDetails
@@ -164,8 +166,8 @@ function splitAndIndexData(data) {
     return { incomplete: noEndDate, complete: hasEndDate };
 }
 function setDateRange(data, el) {
-    el.dataset.startDate = data[0].endDate;
-    el.dataset.endDate = data[data.length - 1].endDate;
+    el.dataset.endDate = data[0].endDate;
+    el.dataset.startDate = data[data.length - 1].endDate;
     let dateRangeChangeEvt = document.createEvent('Events');
     dateRangeChangeEvt.initEvent('daterangeupdated', true, false);
     el.dispatchEvent(dateRangeChangeEvt);

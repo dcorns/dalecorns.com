@@ -12,8 +12,8 @@ module.exports = function daterange(): void {
   let dateEnd = <HTMLInputElement>document.getElementById('date-end');
   host.addEventListener('daterangeupdated', function(e){
     //Might replace host with e.target.dataset since host emits the event
-    dateStart.value = extractDate(host.dataset['startDate']);
-    dateEnd.value = extractDate(host.dataset['endDate']);
+    dateStart.value = host.dataset['startDate'];
+    dateEnd.value = host.dataset['endDate'];
     self.dataset['startDate'] = dateStart.value;
     self.dataset['endDate'] = dateEnd.value;
   });
@@ -26,16 +26,8 @@ module.exports = function daterange(): void {
     let target = <HTMLInputElement>e.target;
     self.dataset['endDate'] = target.value;
     emitEvent(self, 'dateRangeChange');
-  })
+  });
 };
-/**
- * Extracts a date usable by the input element type date value property
- * @param dateString
- * @returns {string}
- */
-function extractDate(dateString: string): string{
-  return dateString.slice(0, 10);
-}
 /**
  * Emits a custom event sending el as the target in the vent object provided to the listener
  * @param el

@@ -5,39 +5,39 @@
  */
 'use strict';
 var clientRoutes = require('../clientRoutes')();
-module.exports = function current(){
-  var tblActivity = document.getElementById('tbl-activity');
-  var tblComplete = document.getElementById('tbl-complete');
-  var dateRange = document.getElementById('date-range');
-  let btnActivityMenu = document.getElementById('btn-activity-menu');
-  let activityMenu = document.getElementById('menu-activities-category');
-  btnActivityMenu.addEventListener('click', function(){
+module.exports = function current() {
+  let tblActivity: HTMLTableElement = <HTMLTableElement>document.getElementById('tbl-activity');
+  let tblComplete: HTMLTableElement = <HTMLTableElement>document.getElementById('tbl-complete');
+  let dateRange: HTMLElement = document.getElementById('date-range');
+  let btnActivityMenu: HTMLButtonElement = <HTMLButtonElement>document.getElementById('btn-activity-menu');
+  let activityMenu: HTMLMenuElement = <HTMLMenuElement>document.getElementById('menu-activities-category');
+  btnActivityMenu.addEventListener('click', function () {
     activityMenu.classList.toggle('hide');
   });
-  let typeIdx = window.sessionStorage.getItem('typeIndex') || '0';
+  let typeIdx: string = window.sessionStorage.getItem('typeIndex') || '0';
   //Put the daterange component inside of date-range
   mySkills.route('daterange', 'date-range');
   dateRange.addEventListener('dateRangeChange', (e) => {
     let sdate = e.target.dataset.startDate;
     let edate = e.target.dataset.endDate;
     getTableData(typeIdx, {start: sdate, end: edate}, (err, data) => {
-      if(err){
+      if (err) {
         playTableDataError(err);
         return;
       }
-      buildActivityTable(data, tblActivity, tblComplete);
+      sortTableData(data, 'endDate');
+      loadNewTableHtml(tblComplete, data, true);
     });
   });
   getTableData(typeIdx, null, (err, data) => {
-    if(err){
+    if (err) {
       playTableDataError(err);
       return;
     }
-    buildActivityTable(data, tblActivity, tblComplete);
-    setDateRange(data, dateRange);
+    buildActivityTable(data, tblActivity, tblComplete, dateRange);
   });
-  clientRoutes.getData('currentCategoryMenu', function(err, data){
-    if(err){
+  clientRoutes.getData('currentCategoryMenu', function (err, data) {
+    if (err) {
       console.error(err);
       return;
     }
@@ -45,19 +45,19 @@ module.exports = function current(){
   });
 };
 //expects tbl to be a tbody element
-function appendActivity(aObj, tbl, isComplete){
-  var row = document.createElement('tr');
-  var startDate = document.createElement('td');
-  var activityLink = document.createElement('td');
-  var activity = document.createElement('td');
+function appendActivity(aObj, tbl, isComplete) {
+  let row: HTMLTableRowElement = document.createElement('tr');
+  let startDate: HTMLTableDataCellElement = document.createElement('td');
+  let activityLink: HTMLTableDataCellElement = document.createElement('td');
+  let activity: HTMLTableDataCellElement = document.createElement('td');
   activity.innerText = aObj.activity;
-  var endDate = isComplete ? document.createElement('td') : null;
-  startDate.innerText = new Date(aObj.startDate).toLocaleDateString();
-  if(aObj.link){
+  let endDate = isComplete ? document.createElement('td') : null;
+  startDate.innerText = aObj.startDate;
+  if (aObj.link) {
     var anchor = document.createElement('a'), anchorIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg'), anchorUse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
     anchor.href = aObj.link;
     anchorIcon.setAttribute('class', 'icon');
-    anchorUse.setAttributeNS('http://www.w3.org/1999/xlink', 'href','#icon-link');
+    anchorUse.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-link');
     anchorIcon.appendChild(anchorUse);
     anchor.appendChild(anchorIcon);
     activityLink.appendChild(anchor);
@@ -66,11 +66,11 @@ function appendActivity(aObj, tbl, isComplete){
   row.appendChild(activity);
   row.appendChild(activityLink);
   row.appendChild(startDate);
-  if(endDate){
-    endDate.innerText = new Date(aObj.endDate).toLocaleDateString();
+  if (endDate) {
+    endDate.innerText = aObj.endDate;// new Date(aObj.endDate).toLocaleDateString();
     row.appendChild(endDate);
   }
-  if(aObj['details']){
+  if (aObj['details']) {
     addDetails(row, aObj.details, 'activity-detail');
   }
   tbl.appendChild(row);
@@ -82,13 +82,15 @@ function appendActivity(aObj, tbl, isComplete){
  * @param data
  * @param tblNow
  * @param tblOld
+ * @param dateRange
  */
-function buildActivityTable(data, tblNow, tblOld){
+function buildActivityTable(data, tblNow, tblOld, dateRange) {
   let splitData = splitAndIndexData(data);
   sortTableData(splitData.incomplete, 'startDate');
-  loadNewTableHtml(tblNow,splitData.incomplete, false);
+  loadNewTableHtml(tblNow, splitData.incomplete, false);
   sortTableData(splitData.complete, 'endDate');
   loadNewTableHtml(tblOld, splitData.complete, true);
+  setDateRange(splitData.complete, dateRange);
 }
 /**
  * @function addDetails
@@ -97,11 +99,11 @@ function buildActivityTable(data, tblNow, tblOld){
  * @param details String
  * @param viewContainer
  */
-function addDetails(rowIn, details, viewContainer){
+function addDetails(rowIn, details, viewContainer) {
   let btn = document.createElement('button');
   btn.textContent = '*';
   rowIn.setAttribute('data-details', details);
-  btn.addEventListener('click', function(){
+  btn.addEventListener('click', function () {
     let detailSection = document.getElementById(viewContainer);
     let row = this.parentNode.parentNode;
     detailSection.innerHTML = row.getAttribute('data-details');
@@ -110,20 +112,20 @@ function addDetails(rowIn, details, viewContainer){
   rowIn.childNodes[0].insertBefore(btn, rowIn.childNodes[0].childNodes[0]);
 }
 
-function buildMenu(data, menuElement){
+function buildMenu(data, menuElement) {
   var menuCount = 0;
-  data.forEach(function(item){
+  data.forEach(function (item) {
     let btn = document.createElement('button');
     btn.textContent = item;
     btn.value = menuCount;
-    btn.addEventListener('click', function(){
+    btn.addEventListener('click', function () {
       var tblActivity = document.getElementById('tbl-activity');
       var tblComplete = document.getElementById('tbl-complete');
       tblActivity.innerHTML = '';
       tblComplete.innerHTML = '';
       window.sessionStorage.setItem('typeIndex', this.value);
-      clientRoutes.getData('current?typeIndex=' + this.value, function(err, data){
-        if(err){
+      clientRoutes.getData('current?typeIndex=' + this.value, function (err, data) {
+        if (err) {
           alert('No current data stored locally. Internet connection required');
           console.error(err);
           return;
@@ -142,9 +144,9 @@ function buildMenu(data, menuElement){
  * @param viewIn
  * @param insertRow
  */
-function tableInsertView(viewIn, insertRow){
+function tableInsertView(viewIn, insertRow) {
   viewIn.classList.toggle('hide');
-  if(!(viewIn.classList.contains('hide'))) {
+  if (!(viewIn.classList.contains('hide'))) {
     let rect = insertRow.getBoundingClientRect();
     viewIn.style.left = `${rect.left + scrollX}px`;
     viewIn.style.top = `${rect.top + rect.height + scrollY}px`;
@@ -157,17 +159,17 @@ function tableInsertView(viewIn, insertRow){
  * @param data
  * @returns {{incomplete: Array, complete: Array}}
  */
-function splitAndIndexData(data){
+function splitAndIndexData(data) {
   let i = 0, len = data.length, noEndDate = [], hasEndDate = [];
-  for(i; i < len; i++){
+  for (i; i < len; i++) {
     data[i].idx = i;
     data[i].endDate ? hasEndDate.push(data[i]) : noEndDate.push(data[i]);
   }
   return {incomplete: noEndDate, complete: hasEndDate};
 }
-function setDateRange(data, el){
-  el.dataset.startDate = data[0].endDate;
-  el.dataset.endDate = data[data.length - 1].endDate;
+function setDateRange(data, el) {
+  el.dataset.endDate = data[0].endDate;
+  el.dataset.startDate = data[data.length - 1].endDate;
   let dateRangeChangeEvt = document.createEvent('Events');
   dateRangeChangeEvt.initEvent('daterangeupdated', true, false);
   el.dispatchEvent(dateRangeChangeEvt);
@@ -178,13 +180,13 @@ function setDateRange(data, el){
  * @param dateRange
  * @param cb
  */
-function getTableData(typeIdx: number, dateRange: {start: string, end: string}, cb: Function): void{
+function getTableData(typeIdx: string, dateRange: {start: string, end: string}, cb: Function): void {
   let route = `current?typeIndex=${typeIdx}`;
   if (dateRange) {
     route = `${route}&startDate=${dateRange.start}&endDate=${dateRange.end}`
   }
-  clientRoutes.getData(route, function(err, data){
-    if(err){
+  clientRoutes.getData(route, function (err, data) {
+    if (err) {
       cb(err, null);
     }
     cb(null, data.json);
@@ -194,7 +196,7 @@ function getTableData(typeIdx: number, dateRange: {start: string, end: string}, 
  * Generic table data error handling
  * @param err
  */
-function playTableDataError(err){
+function playTableDataError(err) {
   alert('No current data stored locally. Internet connection required');
   console.error(err);
 }
@@ -203,15 +205,15 @@ function playTableDataError(err){
  * @param tbl
  * @param data
  */
-function loadNewTableHtml(tbl: HTMLTableElement, data: [Object], includeEndDate: boolean){
-  let len= data.length, c = 0;
+function loadNewTableHtml(tbl: HTMLTableElement, data: [Object], includeEndDate: boolean) {
+  let len = data.length, c = 0;
   tbl.innerHTML = '';
-  for(c; c < len; c++){
+  for (c; c < len; c++) {
     appendActivity(data[c], tbl, includeEndDate);
   }
 }
-function sortTableData(data: [], sortkey: string){
-  data.sort(function(a, b){
+function sortTableData(data: [], sortkey: string) {
+  data.sort(function (a, b) {
     return new Date(b[sortkey]) - new Date(a[sortkey]);
   });
 }
