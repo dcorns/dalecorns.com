@@ -22,7 +22,7 @@ module.exports = function(app){
     activity.type = parseInt(req.query['typeIndex'], 10);
 console.dir(req.query);
     if (req.query.hasOwnProperty('startDate')){
-      corngoose.dbDocFind({type: activity.type, $and:[{endDate:{$gte: req.query.startDate}}, {endDate:{$lt: req.query.endDate}}]}, 'currentActivities', (err, data) => {
+      corngoose.dbDocFind({type: activity.type, $and:[{endDate:{$gte: req.query.startDate}}, {endDate:{$lte: req.query.endDate}}]}, 'currentActivities', (err, data) => {
         if(err) console.dir(err);
         res.status(200);
         res.contentType = 'json';
