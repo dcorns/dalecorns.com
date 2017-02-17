@@ -7,10 +7,10 @@
 ///<reference path='all.d.ts' />
 'use strict';
 
-import * as DbRunner from './dbRunner';
+import * as dbRunner from './dbRunner';
 import proc = require('child_process');
 const webRoot = process.argv[2] || '/public';
-DbRunner.startDb('mongo', function(err, data){
+dbRunner.startDb('mongo', function(err, data){
   if(err){
     throw new Error('It appears that no mongo database is installed');
   }

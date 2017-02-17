@@ -22,3 +22,4 @@ app/js/viewScripts/daterange.js
 /app/views/projects.html
 /app/views/register.html
 /app/views/skills.html
+dbRunner.js
